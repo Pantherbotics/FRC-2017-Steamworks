@@ -1,35 +1,32 @@
 package org.usfirst.frc.team3863.robot.commands;
 
-import org.usfirst.frc.team3863.robot.RobotMap;
 import org.usfirst.frc.team3863.robot.commands.BaseCommand;
 
 /**
  *
  */
-public class AutoTransmission extends BaseCommand {
-
-    public AutoTransmission() {
+public class driveModeArcade extends BaseCommand {
+    public driveModeArcade() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	//requires(driveTrain);
+    	requires(driveTrain);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    @SuppressWarnings("static-access")
-	protected void execute() {
-    	driveTrain.debugCalVal();
-    	double vel = driveTrain.getVelocityAvg();
-    	double cur = driveTrain.getCurrentAvg();
+    protected void execute() {
+    	double leftForward = oi.leftDSstick.getY();
+    	double rightForward = oi.rightDSstick.getY();
+    	double leftTwist = oi.leftDSstick.getZ();
+    	double rightTwist = oi.rightDSstick.getZ();
     	
-    	if (vel > RobotMap.driveShiftLow_HighSpeed){
-    		driveTrain.setTransFast();
-    	}else if (vel < RobotMap.driveShiftHigh_LowSpeed){
-    		driveTrain.setTransSlow();
-    	}
-    	//pseudocode:
-    	//get motor speed and current
-    	//speed shift code
-    	//current shift code
+    	double leftSpeed = leftForward + leftTwist;
+    	double rightSpeed = rightForward - rightTwist;
+    	
+    	driveTrain.setPower(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,6 +41,5 @@ public class AutoTransmission extends BaseCommand {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
     }
 }

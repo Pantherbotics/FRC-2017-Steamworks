@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3863.robot.commands.BaseCommand;
-
+import org.usfirst.frc.team3863.robot.commands.driveModeArcade;
+import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3863.robot.commands.AutoTransmission;
 
 
@@ -25,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	Command drivetrainCommand;
+	Command autoTransCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -36,10 +37,10 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		BaseCommand.init();
 		oi = new OI();
-		//chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		drivetrainCommand = new AutoTransmission();
+		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
+		//chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putData("Drive Mode", chooser);
+		autoTransCommand = new AutoTransmission();
 	}
 
 	/**
@@ -70,7 +71,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -94,15 +94,17 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		Command driveModeCommand = chooser.getSelected();
+		
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		
-		if (drivetrainCommand != null)
-			drivetrainCommand.start();
+		if (autoTransCommand != null)
+			autoTransCommand.start();
+		
+		if (driveModeCommand != null)
+			driveModeCommand.start();
+		DriveTrain.enable();
 	}
 
 	/**
