@@ -27,9 +27,9 @@ public class AutoTransmission extends BaseCommand {
     		driveTrain.setTransSlow();
     	}
     	//pseudocode:
-    	//get motor speed and current
-    	//speed shift code
-    	//current shift code
+    	//always low speed on turning
+    	//shift low speed if current above setpoint
+    	//
     }
 
     // Make this return true when this Command no longer needs to run execute()

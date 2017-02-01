@@ -13,7 +13,10 @@ public class RobotMap {
 	public static int rightDSJoystick = 1;
 	
 	//CAN bus IDs
-	public static int leftDriveTalonID = 2;
+	public static int leftADriveTalonID = 2;
+	public static int leftBDriveTalonID = 3;
+	public static int rightADriveTalonID = 4;
+	public static int rightBDriveTalonID = 5;
 	public static int PCM_ID = 1;
 	public static int PDB_ID = 0;
 	

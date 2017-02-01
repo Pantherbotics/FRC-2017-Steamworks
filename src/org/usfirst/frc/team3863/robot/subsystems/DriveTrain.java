@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  *
  */
 public class DriveTrain extends Subsystem {
-	static CANTalon leftTalon = new CANTalon(RobotMap.leftDriveTalonID);
+	static CANTalon leftTalonA = new CANTalon(RobotMap.leftADriveTalonID);
+	static CANTalon leftTalonB = new CANTalon(RobotMap.leftBDriveTalonID);
+	static CANTalon rightTalonA = new CANTalon(RobotMap.rightADriveTalonID);
+	static CANTalon rightTalonB = new CANTalon(RobotMap.rightBDriveTalonID);
     DoubleSolenoid transSolenoid = new DoubleSolenoid(RobotMap.solTransHigh, 
-			                                                 RobotMap.solTransLow);
+			                                          RobotMap.solTransLow);
 	Value transRest = DoubleSolenoid.Value.kOff;
 	Value transFast = DoubleSolenoid.Value.kForward;
 	Value transSlow = DoubleSolenoid.Value.kReverse;
@@ -30,15 +33,15 @@ public class DriveTrain extends Subsystem {
     }
     
     public static double getVelocityAvg(){
-    	double lV = leftTalon.getEncVelocity();
-    	double rV = lV;//rightTalon.getEncVelocity();
+    	double lV = leftTalonA.getEncVelocity();
+    	double rV = rightTalonA.getEncVelocity();
     	double avg = (Math.abs(lV) + Math.abs(rV)) / 2;
     	return avg;
     }
     
     public static double getCurrentAvg(){
-    	double lA = leftTalon.getOutputCurrent();
-    	double rA = lA;//rightTalon.getOutputCurrent();
+    	double lA = leftTalonA.getOutputCurrent();
+    	double rA = rightTalonA.getOutputCurrent();
     	double avg = (lA + rA) / 2;
     	return avg;
     }
@@ -62,20 +65,26 @@ public class DriveTrain extends Subsystem {
     }
     
     public static void setPower(double left, double right){
-    	leftTalon.set(left);
-    	//rightTalon.set(right);
+    	leftTalonA.set(left);
+    	leftTalonB.set(-left);
+    	rightTalonA.set(right);
+    	rightTalonB.set(-right);
     }
     
     public void disable(){
-    	leftTalon.disable();
+    	leftTalonA.disable();
+    	leftTalonB.disable();
+    	rightTalonA.disable();
+    	rightTalonB.disable();
     	transSolenoid.set(transRest);
-    	//rightTalon.disable()
     }
     
     public static void enable(){
-    	leftTalon.enable();
+    	leftTalonA.enable();
+    	leftTalonB.enable();
+    	rightTalonA.enable();
+    	rightTalonB.enable();
     	//setTransFast();
-    	//rightTalon.enable();
     }
 }
 
