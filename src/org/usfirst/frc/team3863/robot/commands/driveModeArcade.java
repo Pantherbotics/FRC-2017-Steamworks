@@ -14,6 +14,7 @@ public class driveModeArcade extends BaseCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	driveTrain.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
