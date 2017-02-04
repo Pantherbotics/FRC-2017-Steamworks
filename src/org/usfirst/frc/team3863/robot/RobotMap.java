@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3863.robot;
 
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -21,8 +22,8 @@ public class RobotMap {
 	public static int PDB_ID = 0;
 	
 	//PCM I/O pins
-	public static int solTransHigh = 2;
-	public static int solTransLow = 3;
+	public static int solTransHigh = 3;
+	public static int solTransLow = 2;
 	
 	//==============CALIBRATION CONSTANTS==============//
 	//Drive code calibration constants (DO NOT CHANGE UNLESS YOU KNOW WHAT YOU ARE DOING!)

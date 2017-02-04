@@ -21,13 +21,13 @@ public class driveModeArcade extends BaseCommand {
     protected void execute() {
     	double leftForward = oi.leftDSstick.getY();
     	double rightForward = oi.rightDSstick.getY();
-    	double leftTwist = oi.leftDSstick.getZ();
-    	double rightTwist = oi.rightDSstick.getZ();
+    	double leftTwist = oi.leftDSstick.getRawAxis(3);
+    	double rightTwist = oi.rightDSstick.getRawAxis(2);
     	
-    	double leftSpeed = leftForward + leftTwist;
-    	double rightSpeed = rightForward - rightTwist;
+    	double leftSpeed = (leftForward+rightForward)/2 + (leftTwist+rightTwist)/2;
+    	double rightSpeed = (leftForward+rightForward)/2 - (leftTwist+rightTwist)/2;
     	
-    	driveTrain.setPower(leftSpeed, rightSpeed);
+    	driveTrain.setPower(leftSpeed, -rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
