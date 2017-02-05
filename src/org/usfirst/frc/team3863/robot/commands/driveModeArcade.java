@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3863.robot.commands;
 
+import org.usfirst.frc.team3863.robot.RobotMap;
 import org.usfirst.frc.team3863.robot.commands.BaseCommand;
 
 /**
@@ -19,13 +20,16 @@ public class driveModeArcade extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftForward = oi.leftDSstick.getY();
-    	double rightForward = oi.rightDSstick.getY();
-    	double leftTwist = oi.leftDSstick.getRawAxis(3);
-    	double rightTwist = oi.rightDSstick.getRawAxis(2);
-    	
-    	double leftSpeed = (leftForward+rightForward)/2 + (leftTwist+rightTwist)/2;
-    	double rightSpeed = (leftForward+rightForward)/2 - (leftTwist+rightTwist)/2;
+    	double leftSpeed, rightSpeed;
+    	if (!oi.arcadeDSstick.getRawButton(RobotMap.drive_tankToArcadeButton)){
+    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
+    	}else{
+    		double Forward = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeForwardAxis);
+        	double Twist = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeRotateAxis);	
+        	leftSpeed = Forward-Twist;
+        	rightSpeed = Forward+Twist;
+    	}
     	
     	driveTrain.setPower(leftSpeed, -rightSpeed);
     }

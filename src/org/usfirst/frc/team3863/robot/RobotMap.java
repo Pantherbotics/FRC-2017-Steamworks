@@ -30,6 +30,13 @@ public class RobotMap {
 	public static double MAX_DRIVE_SPEED = 4000;
 	
 	//=====================SETTINGS====================//
+	//Joystick Button Mappings
+	public static int drive_tankLeftForwardAxis = 1;
+	public static int drive_tankRightForwardAxis = 1;
+	public static int drive_tankToArcadeButton = 2;
+	public static int drive_arcadeForwardAxis = 1;
+	public static int drive_arcadeRotateAxis = 2;
+	
 	//Tunable drive code parameters
 	public static double driveShiftLow_HighSpeed = 0.7*MAX_DRIVE_SPEED;
 	public static double driveShiftHigh_LowSpeed = 0.3*MAX_DRIVE_SPEED;

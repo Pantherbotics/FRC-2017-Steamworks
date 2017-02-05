@@ -46,10 +46,21 @@ public class DriveTrain extends Subsystem {
     	return avg;
     }
     
+    public static double[] getMotorDirections(){
+    	double[] directions = new double[2];
+    	directions[0] = leftTalonA.getSpeed()/Math.abs(leftTalonA.getSpeed());
+    	directions[1] = rightTalonA.getSpeed()/Math.abs(rightTalonA.getSpeed())*-1;
+    	if (Double.isNaN(directions[0])){directions[0] = 0;}
+    	if (Double.isNaN(directions[1])){directions[1] = 0;}
+		return directions ;
+    	
+    }
+    
     public static void debugCalVal(){
     	double aV = getVelocityAvg();
     	double aC = getCurrentAvg();
-    	System.out.println("cAvg: "+aC+" vAvg: "+aV);
+    	double[] dir = getMotorDirections();
+    	System.out.println("cAvg: "+aC+" vAvg: "+aV+" dL: "+dir[0]+" dR: "+dir[1]);
     }
     
     public void setTransFast(){

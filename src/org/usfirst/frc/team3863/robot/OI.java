@@ -39,5 +39,6 @@ public class OI {
 	
 	public Joystick leftDSstick = new Joystick(RobotMap.leftDSJoystick);
 	public Joystick rightDSstick = new Joystick(RobotMap.rightDSJoystick);
+	public Joystick arcadeDSstick = rightDSstick;
 	
 }
