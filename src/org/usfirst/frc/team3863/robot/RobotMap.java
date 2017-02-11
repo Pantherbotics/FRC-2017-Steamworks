@@ -20,6 +20,9 @@ public class RobotMap {
 	public static int rightBDriveTalonID = 14;
 	public static int PCM_ID = 0;
 	public static int PDB_ID = 0;
+	public static int winchATalonID = 0;
+	public static int winchBTalonID = 0;
+	public static int intakeTalonID = 0;
 	
 	//PCM I/O pins
 	public static int solTransHigh = 3;
