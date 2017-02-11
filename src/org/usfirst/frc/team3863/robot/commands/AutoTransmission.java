@@ -14,6 +14,19 @@ public class AutoTransmission extends BaseCommand {
     // Called repeatedly when this Command is scheduled to run
     @SuppressWarnings("static-access")
 	protected void execute() {
+    	if(oi.arcadeDSstick.getRawButton(RobotMap.drive_transToggleButton) && !oi.autoTransmissionTrigger){
+    		System.out.println("AutoTrans Disabled");
+    		oi.autoTransmissionEnabled = false;
+    	}else if(!oi.arcadeDSstick.getRawButton(RobotMap.drive_transToggleButton) && oi.autoTransmissionTrigger){
+    		System.out.println("AutoTrans Enabled");
+    		oi.autoTransmissionEnabled = true;
+    	}
+    	oi.autoTransmissionTrigger = oi.arcadeDSstick.getRawButton(RobotMap.drive_transToggleButton);
+    	
+    	if(!oi.autoTransmissionEnabled){
+    		driveTrain.setTransSlow();
+    		return;
+    	}
     	//driveTrain.debugCalVal();
     	double vel = driveTrain.getVelocityAvg();
     	double cur = driveTrain.getCurrentAvg();
@@ -37,10 +50,6 @@ public class AutoTransmission extends BaseCommand {
     			switchTimeout = 20;
     		}
     	}
-    	//pseudocode:
-    	//always low speed on turning
-    	//shift low speed if current above setpoint
-    	//
     }
     
     

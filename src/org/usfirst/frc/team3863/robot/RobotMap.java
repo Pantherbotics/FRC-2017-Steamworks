@@ -37,6 +37,8 @@ public class RobotMap {
 	public static int drive_arcadeForwardAxis = 1;
 	public static int drive_arcadeRotateAxis = 2;
 	
+	public static int drive_transToggleButton = 3;
+	
 	//Tunable drive code parameters
 	public static double driveShiftLow_HighSpeed = 0.7*MAX_DRIVE_SPEED;
 	public static double driveShiftHigh_LowSpeed = 0.3*MAX_DRIVE_SPEED;
