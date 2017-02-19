@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3863.robot.commands.BaseCommand;
 import org.usfirst.frc.team3863.robot.commands.driveModeArcade;
 import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3863.robot.subsystems.*;
 import org.usfirst.frc.team3863.robot.commands.AutoTransmission;
 
 
@@ -105,6 +106,8 @@ public class Robot extends IterativeRobot {
 		if (driveModeCommand != null)
 			driveModeCommand.start();
 		DriveTrain.enable();
+		Intake.startIntake();
+		ShooterMechanism.enableIntakeMode();
 	}
 
 	/**

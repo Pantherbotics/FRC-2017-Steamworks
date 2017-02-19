@@ -42,6 +42,6 @@ public class OI {
 	public Joystick arcadeDSstick = rightDSstick;
 	
 	public boolean autoTransmissionTrigger = false;
-	public boolean autoTransmissionEnabled = true;
+	public boolean autoTransmissionEnabled = false;
 	
 }

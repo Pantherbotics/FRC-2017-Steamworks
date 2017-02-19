@@ -6,11 +6,11 @@ import org.usfirst.frc.team3863.robot.commands.BaseCommand;
 /**
  *
  */
-public class driveModeArcade extends BaseCommand {
-    public driveModeArcade() {
+public class driveShootControl extends BaseCommand {
+    public driveShootControl() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(driveTrain);
+    	requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time

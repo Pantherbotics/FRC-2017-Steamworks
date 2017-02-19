@@ -14,7 +14,8 @@ public abstract class BaseCommand extends Command {
 
     //SubSystems
     public static DriveTrain driveTrain = new DriveTrain();
-
+    public static ShooterMechanism shooterMechanism = new ShooterMechanism();
+    
     public static void init() {
         oi = new OI();
     }

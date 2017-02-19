@@ -17,12 +17,12 @@ public class Intake extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void startIntake(){
+    public static void startIntake(){
     	intakeTalon.enable();
-    	intakeTalon.set(0.7);
+    	intakeTalon.set(1);
     }
     
-    public void stopIntake(){
+    public static void stopIntake(){
     	intakeTalon.set(0);
     	intakeTalon.disable();
     }

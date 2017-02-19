@@ -27,7 +27,7 @@ public class AutoTransmission extends BaseCommand {
     		driveTrain.setTransSlow();
     		return;
     	}
-    	//driveTrain.debugCalVal();
+    	driveTrain.debugCalVal();
     	double vel = driveTrain.getVelocityAvg();
     	double cur = driveTrain.getCurrentAvg();
     	double[] dir = driveTrain.getMotorDirections();

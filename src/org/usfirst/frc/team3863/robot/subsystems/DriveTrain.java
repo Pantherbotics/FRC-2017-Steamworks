@@ -76,8 +76,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public static void setPower(double left, double right){
-    	leftTalonA.set(left);
-    	leftTalonB.set(left);
+    	leftTalonA.set(-left);
+    	leftTalonB.set(-left);
     	rightTalonA.set(right);
     	rightTalonB.set(right);
     }
