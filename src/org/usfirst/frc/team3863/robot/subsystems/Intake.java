@@ -26,5 +26,10 @@ public class Intake extends Subsystem {
     	intakeTalon.set(0);
     	intakeTalon.disable();
     }
+    
+    public static boolean getStatus(){
+    	double setSpeed = intakeTalon.get();
+    	return Math.abs(setSpeed) > 0;
+    }
 }
 

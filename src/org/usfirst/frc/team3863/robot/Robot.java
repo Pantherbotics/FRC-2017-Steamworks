@@ -105,9 +105,12 @@ public class Robot extends IterativeRobot {
 		
 		if (driveModeCommand != null)
 			driveModeCommand.start();
+		
 		DriveTrain.enable();
 		Intake.startIntake();
-		ShooterMechanism.enableIntakeMode();
+		ShooterMechanism.zeroShroud();
+		//ShooterMechanism.extendShroud();
+		//ShooterMechanism.enableIntakeMode();
 	}
 
 	/**
@@ -116,7 +119,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
+		ShooterMechanism.debugShroud();
 	}
 
 	/**
