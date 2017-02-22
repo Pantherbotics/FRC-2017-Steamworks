@@ -2,6 +2,7 @@ package org.usfirst.frc.team3863.robot.commands;
 
 import org.usfirst.frc.team3863.robot.RobotMap;
 import org.usfirst.frc.team3863.robot.commands.BaseCommand;
+import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
 
 /**
  *
@@ -30,8 +31,7 @@ public class driveModeArcade extends BaseCommand {
         	leftSpeed = Forward-Twist;
         	rightSpeed = Forward+Twist;
     	}
-    	
-    	driveTrain.setPower(leftSpeed, -rightSpeed);
+    	DriveTrain.setPower(-leftSpeed, -rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

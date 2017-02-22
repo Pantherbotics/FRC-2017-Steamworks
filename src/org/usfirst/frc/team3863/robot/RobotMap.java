@@ -14,16 +14,25 @@ public class RobotMap {
 	public static int rightDSJoystick = 1;
 	
 	//CAN bus IDs
-	public static int leftADriveTalonID = 13;
+	public static int rightADriveTalonID = 2;
+	public static int rightBDriveTalonID = 12;
+	public static int leftADriveTalonID = 3;
 	public static int leftBDriveTalonID = 15;
-	public static int rightADriveTalonID = 12;
-	public static int rightBDriveTalonID = 14;
 	public static int PCM_ID = 0;
 	public static int PDB_ID = 0;
+	public static int winchATalonID = 13;
+	public static int winchBTalonID = 14;
+	public static int intakeTalonID = 6;
+	public static int flywheelATalonID = 0;
+	public static int flywheelBTalonID = 1;
+	public static int flywheelBeltTalonID = 7;
+	public static int flywheelCoverTalonID = 5;
 	
 	//PCM I/O pins
-	public static int solTransHigh = 3;
-	public static int solTransLow = 2;
+	public static int solTransHigh = 0;
+	public static int solTransLow = 1;
+	public static int solGateOpen = 2;
+	public static int solGateClose = 3;
 	
 	//==============CALIBRATION CONSTANTS==============//
 	//Drive code calibration constants (DO NOT CHANGE UNLESS YOU KNOW WHAT YOU ARE DOING!)
@@ -37,7 +46,7 @@ public class RobotMap {
 	public static int drive_arcadeForwardAxis = 1;
 	public static int drive_arcadeRotateAxis = 2;
 	
-	public static int drive_transToggleButton = 3;
+	public static int drive_transToggleButton = 1;
 	
 	//Tunable drive code parameters
 	public static double driveShiftLow_HighSpeed = 0.7*MAX_DRIVE_SPEED;
