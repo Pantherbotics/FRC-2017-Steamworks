@@ -118,6 +118,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putData(Scheduler.getInstance());
 		Scheduler.getInstance().run();
 		ShooterMechanism.debugShroud();
 	}

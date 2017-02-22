@@ -2,14 +2,14 @@ package org.usfirst.frc.team3863.robot.commands;
 
 import org.usfirst.frc.team3863.robot.subsystems.ShooterMechanism;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
  */
-public class decrementShroud extends BaseCommand {
+public class pulseArms extends BaseCommand {
 
-    public decrementShroud() {
+    public pulseArms() {
         // Use requires() here to declare subsystem dependencies
         requires(shooterMechanism);
     }
@@ -20,8 +20,17 @@ public class decrementShroud extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("lower");
-    	ShooterMechanism.lowerShroud(0.1);
+    	boolean st = ShooterMechanism.getGateState();
+    	if (!st){
+    		ShooterMechanism.closeGate();
+    		Timer.delay(0.4);
+    		ShooterMechanism.openGate();
+    	}else{
+    		ShooterMechanism.openGate();
+    		Timer.delay(0.4);
+    		ShooterMechanism.closeGate();
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

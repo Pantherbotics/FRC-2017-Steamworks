@@ -7,12 +7,14 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class ShooterMechanism extends Subsystem {
 	boolean intakeMode = false;
+	static double setShootSpeed = 1.0;
 	static CANTalon flywheelATalon = new CANTalon(RobotMap.flywheelATalonID);
 	static CANTalon flywheelBTalon = new CANTalon(RobotMap.flywheelBTalonID);
 	static CANTalon flywheelBeltTalon = new CANTalon(RobotMap.flywheelBeltTalonID);
@@ -26,7 +28,14 @@ public class ShooterMechanism extends Subsystem {
     }
     
     public static void debugShroud(){
-        System.out.println(""+flywheelCoverTalon.getPosition());
+        SmartDashboard.putNumber("ShroudPosisition", flywheelCoverTalon.getPosition());
+        SmartDashboard.putBoolean("ShroudLimitSwitch", flywheelCoverTalon.isFwdLimitSwitchClosed());
+        SmartDashboard.putNumber("actualFlywheelSpeed", flywheelCoverTalon.get());
+        SmartDashboard.putNumber("setFlywheelSpeed", setShootSpeed);
+    }
+    
+    public static void changeSetShootSpeed(double incr){
+    	setShootSpeed += incr;
     }
     
     public static void zeroShroud(){
@@ -76,8 +85,14 @@ public class ShooterMechanism extends Subsystem {
     	flywheelBeltTalon.set(-speed);
     }
     
+    public static void updateSpeed(){
+    	if (flywheelATalon.get() == 0){return;}
+    	setFlywheelSpeed(setShootSpeed);
+    }
+    
     public static void enableIntakeMode(){
     	System.out.println("Intake Mode Enabled");
+    	SmartDashboard.putString("Shooter Mode: ", "Intake");
     	setFlywheelSpeed(0.35);
     	setBeltSpeed(1);
     	closeGate();
@@ -86,6 +101,7 @@ public class ShooterMechanism extends Subsystem {
     
     public static void disableMode(){
     	System.out.println("Shooter Disabled");
+    	SmartDashboard.putString("Shooter Mode: ", "Disabled");
     	setFlywheelSpeed(0);
     	setBeltSpeed(0);
     	closeGate();
@@ -94,7 +110,8 @@ public class ShooterMechanism extends Subsystem {
     
     public static void enableShootMode(){
     	System.out.println("Shoot Mode Enabled");
-    	setFlywheelSpeed(1);
+    	SmartDashboard.putString("Shooter Mode: ", "Shoot");
+    	setFlywheelSpeed(setShootSpeed);
     	setBeltSpeed(1);
     	openGate();
     	zeroShroud();
@@ -102,14 +119,16 @@ public class ShooterMechanism extends Subsystem {
     
     public static void openGate(){
     	gateSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	SmartDashboard.putString("Gate Mode: ", "Open");
     }
     public static void closeGate(){
     	gateSolenoid.set(DoubleSolenoid.Value.kForward);
+    	SmartDashboard.putString("Gate Mode: ", "Closed");
     }
     
     public static boolean getGateState(){
     	DoubleSolenoid.Value val = gateSolenoid.get();
-    	if (val == DoubleSolenoid.Value.kForward){
+    	if (val == DoubleSolenoid.Value.kForward || val == DoubleSolenoid.Value.kOff){
     		return true;
     	}else{
     		return false;

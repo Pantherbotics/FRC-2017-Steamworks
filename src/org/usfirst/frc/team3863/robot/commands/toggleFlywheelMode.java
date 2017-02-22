@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class toggleFlywheelMode extends Command {
+public class toggleFlywheelMode extends BaseCommand {
 	boolean isComplete = false; 
     public toggleFlywheelMode() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time

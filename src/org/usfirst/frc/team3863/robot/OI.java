@@ -44,10 +44,11 @@ public class OI {
 	public Joystick arcadeDSstick = rightDSstick;
 	
 	Button butIntakeToggle = new JoystickButton(rightDSstick, 11);
+	Button butGateToggle = new JoystickButton(rightDSstick, 9);
 	Button butFlywheelUp = new JoystickButton(rightDSstick, 6);
 	Button butFlywheelDown = new JoystickButton(rightDSstick, 4);
-	Button butShroudUp = new JoystickButton(rightDSstick, 5);
-	Button butShroudDown = new JoystickButton(rightDSstick, 3);
+	Button butShroudUp = new JoystickButton(rightDSstick, 3);
+	Button butShroudDown = new JoystickButton(rightDSstick, 5);
 	
 	Button butIntakeMode = new JoystickButton(leftDSstick, 3);
 	Button butShootMode = new JoystickButton(leftDSstick, 5);
@@ -70,6 +71,8 @@ public class OI {
 		
 		butIntakeMode.whenPressed(new enableShooterMode());
 		butShootMode.whenPressed(new enableIntakeMode());
+		
+		butGateToggle.whenPressed(new pulseArms());
 	}
 	
 }

@@ -1,15 +1,17 @@
 package org.usfirst.frc.team3863.robot.commands;
 
+import org.usfirst.frc.team3863.robot.subsystems.ShooterMechanism;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class incrementFlywheelSpeed extends Command {
+public class incrementFlywheelSpeed extends BaseCommand {
 
     public incrementFlywheelSpeed() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time
@@ -18,11 +20,13 @@ public class incrementFlywheelSpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	ShooterMechanism.changeSetShootSpeed(0.05);
+    	ShooterMechanism.updateSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

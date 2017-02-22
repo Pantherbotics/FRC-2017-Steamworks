@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class incrementShroud extends Command {
+public class incrementShroud extends BaseCommand {
 
     public incrementShroud() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time

@@ -5,6 +5,7 @@ import org.usfirst.frc.team3863.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,11 +21,14 @@ public class Intake extends Subsystem {
     public static void startIntake(){
     	intakeTalon.enable();
     	intakeTalon.set(1);
+		SmartDashboard.putString("Intake: ", "Enabled");
+
     }
     
     public static void stopIntake(){
     	intakeTalon.set(0);
     	intakeTalon.disable();
+    	SmartDashboard.putString("Intake: ", "Disabled");
     }
     
     public static boolean getStatus(){

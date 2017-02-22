@@ -3,15 +3,16 @@ package org.usfirst.frc.team3863.robot.commands;
 import org.usfirst.frc.team3863.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class enableIntakeMode extends Command {
+public class enableIntakeMode extends BaseCommand {
 
     public enableIntakeMode() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time
