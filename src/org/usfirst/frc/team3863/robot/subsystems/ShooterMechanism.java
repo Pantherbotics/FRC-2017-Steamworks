@@ -32,6 +32,7 @@ public class ShooterMechanism extends Subsystem {
         SmartDashboard.putBoolean("ShroudLimitSwitch", flywheelCoverTalon.isFwdLimitSwitchClosed());
         SmartDashboard.putNumber("actualFlywheelSpeed", flywheelCoverTalon.get());
         SmartDashboard.putNumber("setFlywheelSpeed", setShootSpeed);
+        //System.out.println("pos: "+flywheelCoverTalon.getPosition()+" lm: "+flywheelCoverTalon.isFwdLimitSwitchClosed()+"");
     }
     
     public static void changeSetShootSpeed(double incr){
@@ -64,14 +65,14 @@ public class ShooterMechanism extends Subsystem {
     	if (flywheelCoverTalon.getPosition() >= 2800){
     		return true;
     	}
-    	flywheelCoverTalon.set(-0.6);
+    	flywheelCoverTalon.set(-0.36);
     	Timer.delay(RTime);
     	flywheelCoverTalon.set(0);
     	return false;
     }
     
     public static void lowerShroud(double LTime){
-    	flywheelCoverTalon.set(0.6);
+    	flywheelCoverTalon.set(0.36);
     	Timer.delay(LTime);
     	flywheelCoverTalon.set(0);
     }
