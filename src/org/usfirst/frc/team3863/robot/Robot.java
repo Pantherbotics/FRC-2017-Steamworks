@@ -46,7 +46,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Drive Mode", chooser);
-		autoTransCommand = new AutoTransmission();
+		//autoTransCommand = new AutoTransmission();
 		
 		autonChooser.addDefault("No Autonomous", null);
 		autonChooser.addObject("Drive Forward 1s", null);
