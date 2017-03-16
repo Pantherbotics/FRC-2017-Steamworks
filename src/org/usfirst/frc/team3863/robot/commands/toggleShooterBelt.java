@@ -1,17 +1,17 @@
 package org.usfirst.frc.team3863.robot.commands;
 
-import org.usfirst.frc.team3863.robot.subsystems.ShooterMechanism;
+import org.usfirst.frc.team3863.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class toggleIntake extends BaseCommand {
-    boolean isComplete = false;
-    public toggleIntake() {
+public class toggleShooterBelt extends BaseCommand {
+	boolean isComplete = false;
+    public toggleShooterBelt() {
         // Use requires() here to declare subsystem dependencies
-        requires(shooterMechanism);
+    	requires(shooterMechanism);
     }
 
     // Called just before this Command runs the first time
@@ -20,17 +20,18 @@ public class toggleIntake extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (ShooterMechanism.getBeltState()){
-    		ShooterMechanism.setBeltSpeed(0);
+    	boolean st = Intake.getStatus();
+    	if (st){
+    		Intake.stopIntake();
     	}else{
-    		ShooterMechanism.setBeltSpeed(1);
+    		Intake.startIntake();
     	}
     	isComplete = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isComplete;
+    	return isComplete;
     }
 
     // Called once after isFinished returns true

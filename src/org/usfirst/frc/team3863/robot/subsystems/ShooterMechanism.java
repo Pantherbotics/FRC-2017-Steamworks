@@ -135,6 +135,10 @@ public class ShooterMechanism extends Subsystem {
     	}
     }
     
+    public static boolean getBeltState(){
+    	return !(flywheelBeltTalon.get() == 0);
+    }
+    
     public static void setBeltBlock(boolean isBlocked){
     	if (isBlocked){
     		if (flywheelBeltTalon.get() == 0){return;}
