@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	Command autoTransCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> autonChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,6 +46,11 @@ public class Robot extends IterativeRobot {
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Drive Mode", chooser);
 		autoTransCommand = new AutoTransmission();
+		
+		autonChooser.addDefault("No Autonomous", null);
+		autonChooser.addObject("Drive Forward 1s", null);
+		//chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putData("Autonomous Selection:", chooser);
 	}
 
 	/**
