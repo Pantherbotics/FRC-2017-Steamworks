@@ -85,7 +85,6 @@ public class Robot extends IterativeRobot {
 
 		Command autonomousCommand = chooser.getSelected();
 		 
-
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -145,7 +144,7 @@ public class Robot extends IterativeRobot {
 		lastPOV = oi.partnerDSstick.getPOV();
 		
 		if (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8) && !lastIntakeToggle){
-			Command curCMD = new toggleIntake();
+			Command curCMD = new toggleShooterBelt();
 			curCMD.start();
 		}
 		lastIntakeToggle = (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8));
@@ -172,6 +171,12 @@ public class Robot extends IterativeRobot {
 			flyCommand.start();
 		lastIncFly = (oi.partnerDSstick.getRawButton(5) | oi.partnerDSstick.getRawAxis(2) >= 0.98);		
 				//butGateToggle.whenPressed(new pulseArms());
+		if (oi.partnerDSstick.getRawButton(6)){
+			Winch.setWinchPower(-1);
+		}else{
+			Winch.setWinchPower(0);
+		}
+		
 	}
 
 	/**

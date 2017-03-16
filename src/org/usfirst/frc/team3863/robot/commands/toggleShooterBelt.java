@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3863.robot.commands;
 
 import org.usfirst.frc.team3863.robot.subsystems.Intake;
+import org.usfirst.frc.team3863.robot.subsystems.ShooterMechanism;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,11 +21,10 @@ public class toggleShooterBelt extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean st = Intake.getStatus();
-    	if (st){
-    		Intake.stopIntake();
+    	if (ShooterMechanism.getBeltState()){
+    		ShooterMechanism.setBeltSpeed(0);
     	}else{
-    		Intake.startIntake();
+    		ShooterMechanism.setBeltSpeed(1);
     	}
     	isComplete = true;
     }

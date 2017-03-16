@@ -16,9 +16,9 @@ public class Winch extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setWinchPower(double power){
+    public static void setWinchPower(double power){
     	winchTalonA.set(power);
-    	winchTalonB.set(-power);
+    	winchTalonB.set(power);
     }
     
     public void enableBreak(){
