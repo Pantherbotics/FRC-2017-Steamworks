@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("if you use enough angle brackets you can get anywhere");
 		BaseCommand.init();
 		oi = new OI();
 		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
