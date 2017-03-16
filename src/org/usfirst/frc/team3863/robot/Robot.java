@@ -110,10 +110,10 @@ public class Robot extends IterativeRobot {
 			driveModeCommand.start();
 		
 		DriveTrain.enable();
-		Intake.startIntake();
 		ShooterMechanism.zeroShroud();
 		Command dis = new disableMode();
 		dis.start();
+		Intake.startIntake();
 		//ShooterMechanism.extendShroud();
 		//ShooterMechanism.enableIntakeMode();
 	}

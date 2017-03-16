@@ -44,17 +44,19 @@ public class OI {
 	public Joystick arcadeDSstick = rightDSstick;
 	public Joystick partnerDSstick = new Joystick(RobotMap.partnerDSJoystick);
 	
-	Button butIntakeToggle = new JoystickButton(rightDSstick, 11);
-	Button butGateToggle = new JoystickButton(rightDSstick, 9);
-	Button butFlywheelUp = new JoystickButton(rightDSstick, 6);
-	Button butFlywheelDown = new JoystickButton(rightDSstick, 4);
-	Button butShroudUp = new JoystickButton(rightDSstick, 3);
-	Button butShroudDown = new JoystickButton(rightDSstick, 5);
+	Button butIntakeBeltToggle = new JoystickButton(partnerDSstick, 2);
+	Button butGateToggle = new JoystickButton(partnerDSstick, 3);
+	Button butRunWinch = new JoystickButton(partnerDSstick, 4);
 	
-	Button butIntakeMode = new JoystickButton(leftDSstick, 3);
-	Button butShootMode = new JoystickButton(leftDSstick, 5);
+	//Button butFlywheelUp = new JoystickButton(rightDSstick, 6);
+	//Button butFlywheelDown = new JoystickButton(rightDSstick, 4);
+	//Button butShroudUp = new JoystickButton(rightDSstick, 3);
+	//Button butShroudDown = new JoystickButton(rightDSstick, 5);
 	
-	Button butDisabledMode = new JoystickButton(leftDSstick, 2);
+	//Button butIntakeMode = new JoystickButton(leftDSstick, 3);
+	//Button butShootMode = new JoystickButton(leftDSstick, 5);
+	
+	//Button butDisabledMode = new JoystickButton(leftDSstick, 2);
 	
 	public boolean autoTransmissionTrigger = false;
 	public boolean autoTransmissionEnabled = false;
@@ -73,7 +75,9 @@ public class OI {
 		//butIntakeMode.whenPressed(new enableShooterMode());
 		//butShootMode.whenPressed(new enableIntakeMode());
 		
-		//butGateToggle.whenPressed(new pulseArms());
+		butGateToggle.whenPressed(new pulseArms());
+		butIntakeBeltToggle.whenPressed(new toggleIntake());
+		butRunWinch.whileHeld(new runWinch());
 	}
 	
 }
