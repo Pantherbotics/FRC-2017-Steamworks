@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 		
 		autonChooser.addDefault("No Autonomous", null);
 		autonChooser.addObject("Drive Forward 1s", null);
-		//chooser.addObject("My Auto", new MyAutoCommand());
+
 		SmartDashboard.putData("Autonomous Selection:", chooser);
 	}
 
