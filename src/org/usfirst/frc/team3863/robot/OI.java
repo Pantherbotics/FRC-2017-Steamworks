@@ -80,7 +80,6 @@ public class OI {
 		
 		butGateToggle.whenPressed(new pulseArms());
 		butIntakeBeltToggle.whenPressed(new toggleIntake());
-		butRunWinch.whileHeld(new runWinch());
 		
 		butTransSlow.whenPressed(new switchLowSpeedTransmission());
 		butTransFast.whenPressed(new switchHighSpeedTransmission());
