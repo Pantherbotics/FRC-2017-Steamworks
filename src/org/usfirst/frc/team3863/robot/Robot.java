@@ -128,7 +128,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(Scheduler.getInstance());
 		Scheduler.getInstance().run();
 		ShooterMechanism.debugShroud();
-		System.out.println("pov: "+oi.partnerDSstick.getRawAxis(3));
 		Command shroudCommand = null;
 		if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
 			shroudCommand = new enableShooterMode();

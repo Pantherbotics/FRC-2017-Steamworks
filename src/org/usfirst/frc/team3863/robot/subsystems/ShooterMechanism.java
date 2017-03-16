@@ -30,8 +30,10 @@ public class ShooterMechanism extends Subsystem {
     public static void debugShroud(){
         SmartDashboard.putNumber("ShroudPosisition", flywheelCoverTalon.getPosition());
         SmartDashboard.putBoolean("ShroudLimitSwitch", flywheelCoverTalon.isFwdLimitSwitchClosed());
-        SmartDashboard.putNumber("actualFlywheelSpeed", flywheelCoverTalon.get());
-        SmartDashboard.putNumber("setFlywheelSpeed", setShootSpeed);
+        SmartDashboard.putNumber("actualCoverPower", flywheelCoverTalon.get());
+        SmartDashboard.putNumber("setFlywheelPower", setShootSpeed);
+        SmartDashboard.putNumber("actualFlywheelSpeedA", flywheelATalon.getSpeed());
+        SmartDashboard.putNumber("actualFlywheelSpeedB", flywheelBTalon.getSpeed());
     }
     
     public static void changeSetShootSpeed(double incr){
