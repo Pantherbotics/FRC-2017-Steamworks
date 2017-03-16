@@ -48,8 +48,8 @@ public class OI {
 	Button butGateToggle = new JoystickButton(partnerDSstick, 3);
 	Button butRunWinch = new JoystickButton(partnerDSstick, 4);
 	
-	Button butTransFast = new JoystickButton(rightDSstick, 0);
-	Button butTransSlow = new JoystickButton(leftDSstick, 0);
+	Button butTransFast = new JoystickButton(rightDSstick, 1);
+	Button butTransSlow = new JoystickButton(leftDSstick, 1);
 	
 	//Button butFlywheelUp = new JoystickButton(rightDSstick, 6);
 	//Button butFlywheelDown = new JoystickButton(rightDSstick, 4);
