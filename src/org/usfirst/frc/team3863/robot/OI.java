@@ -48,6 +48,9 @@ public class OI {
 	Button butGateToggle = new JoystickButton(partnerDSstick, 3);
 	Button butRunWinch = new JoystickButton(partnerDSstick, 4);
 	
+	Button butTransFast = new JoystickButton(rightDSstick, 0);
+	Button butTransSlow = new JoystickButton(leftDSstick, 0);
+	
 	//Button butFlywheelUp = new JoystickButton(rightDSstick, 6);
 	//Button butFlywheelDown = new JoystickButton(rightDSstick, 4);
 	//Button butShroudUp = new JoystickButton(rightDSstick, 3);
@@ -78,6 +81,9 @@ public class OI {
 		butGateToggle.whenPressed(new pulseArms());
 		butIntakeBeltToggle.whenPressed(new toggleIntake());
 		butRunWinch.whileHeld(new runWinch());
+		
+		butTransSlow.whenPressed(new switchLowSpeedTransmission());
+		butTransFast.whenPressed(new switchHighSpeedTransmission());
 	}
 	
 }
