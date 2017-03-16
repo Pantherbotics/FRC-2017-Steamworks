@@ -64,7 +64,7 @@ public class ShooterMechanism extends Subsystem {
     	if (flywheelCoverTalon.getPosition() >= 2800){
     		return true;
     	}
-    	flywheelCoverTalon.set(-0.6);
+    	flywheelCoverTalon.set(-0.3);
     	Timer.delay(RTime);
     	flywheelCoverTalon.set(0);
     	return false;
@@ -133,6 +133,21 @@ public class ShooterMechanism extends Subsystem {
     	}else{
     		return false;
     	}
+    }
+    
+    public static void setBeltBlock(boolean isBlocked){
+    	if (isBlocked){
+    		if (flywheelBeltTalon.get() == 0){return;}
+        	else{
+        		setBeltSpeed(0.04);
+        	}
+    	}else{
+    		if (flywheelBeltTalon.get()==0.04){return;}
+        	else{
+        		setBeltSpeed(1);
+        	}
+    	}
+    	
     }
 }
 

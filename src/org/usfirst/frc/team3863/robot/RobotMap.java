@@ -12,6 +12,7 @@ public class RobotMap {
 	//Joystick IDs
 	public static int leftDSJoystick = 0;
 	public static int rightDSJoystick = 1;
+	public static int partnerDSJoystick = 2;
 	
 	//CAN bus IDs
 	public static int rightADriveTalonID = 2;

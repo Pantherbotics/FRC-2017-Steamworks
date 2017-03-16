@@ -42,6 +42,7 @@ public class OI {
 	public Joystick leftDSstick = new Joystick(RobotMap.leftDSJoystick);
 	public Joystick rightDSstick = new Joystick(RobotMap.rightDSJoystick);
 	public Joystick arcadeDSstick = rightDSstick;
+	public Joystick partnerDSstick = new Joystick(RobotMap.partnerDSJoystick);
 	
 	Button butIntakeToggle = new JoystickButton(rightDSstick, 11);
 	Button butGateToggle = new JoystickButton(rightDSstick, 9);
@@ -61,18 +62,18 @@ public class OI {
 	public boolean intakeWheelEnabled = false;
 	
 	public OI(){
-		butFlywheelUp.whenPressed(new incrementFlywheelSpeed());
-		butFlywheelDown.whenPressed(new decrementFlywheelSpeed());
-		butIntakeToggle.whenPressed(new toggleIntake());
+		//butFlywheelUp.whenPressed(new incrementFlywheelSpeed());
+		//butFlywheelDown.whenPressed(new decrementFlywheelSpeed());
+		//butIntakeToggle.whenPressed(new toggleIntake());
 		
-		butDisabledMode.whenPressed(new disableMode());
-		butShroudUp.whenPressed(new decrementShroud());
-		butShroudDown.whenPressed(new incrementShroud());
+		//butDisabledMode.whenPressed(new disableMode());
+		//butShroudUp.whenPressed(new decrementShroud());
+		//butShroudDown.whenPressed(new incrementShroud());
 		
-		butIntakeMode.whenPressed(new enableShooterMode());
-		butShootMode.whenPressed(new enableIntakeMode());
+		//butIntakeMode.whenPressed(new enableShooterMode());
+		//butShootMode.whenPressed(new enableIntakeMode());
 		
-		butGateToggle.whenPressed(new pulseArms());
+		//butGateToggle.whenPressed(new pulseArms());
 	}
 	
 }

@@ -7,8 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3863.robot.commands.BaseCommand;
-import org.usfirst.frc.team3863.robot.commands.driveModeArcade;
+import org.usfirst.frc.team3863.robot.commands.*;
 import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3863.robot.subsystems.*;
 import org.usfirst.frc.team3863.robot.commands.AutoTransmission;
@@ -22,7 +21,11 @@ import org.usfirst.frc.team3863.robot.commands.AutoTransmission;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+    int lastPOV = 0;
+    
+    boolean lastIncShoot = false;
+    boolean lastIncFly = false;
+    boolean lastIntakeToggle = false;
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
@@ -109,6 +112,8 @@ public class Robot extends IterativeRobot {
 		DriveTrain.enable();
 		Intake.startIntake();
 		ShooterMechanism.zeroShroud();
+		Command dis = new disableMode();
+		dis.start();
 		//ShooterMechanism.extendShroud();
 		//ShooterMechanism.enableIntakeMode();
 	}
@@ -121,6 +126,49 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(Scheduler.getInstance());
 		Scheduler.getInstance().run();
 		ShooterMechanism.debugShroud();
+		System.out.println("pov: "+oi.partnerDSstick.getRawAxis(3));
+		Command shroudCommand = null;
+		if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
+			shroudCommand = new enableShooterMode();
+		}
+		else if (oi.partnerDSstick.getPOV() == 270 && lastPOV == -1){
+			shroudCommand = new enableIntakeMode();
+		}
+		else if (oi.partnerDSstick.getPOV() == 180 && lastPOV == -1){
+			shroudCommand = new disableMode();
+        }
+		if (shroudCommand != null)
+			shroudCommand.start();
+		lastPOV = oi.partnerDSstick.getPOV();
+		
+		if (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8) && !lastIntakeToggle){
+			Command curCMD = new toggleIntake();
+			curCMD.start();
+		}
+		lastIntakeToggle = (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8));
+		
+		Command posCommand = null;
+		if (oi.partnerDSstick.getRawButton(6) && !lastIncShoot){
+			posCommand = new incrementShroud();
+		}
+		else if (oi.partnerDSstick.getRawAxis(3) >= 0.98 && !lastIncShoot){
+			posCommand = new decrementShroud();
+		}
+		if (posCommand != null)
+			posCommand.start();
+		lastIncShoot = (oi.partnerDSstick.getRawButton(6) | oi.partnerDSstick.getRawAxis(3) >= 0.98);
+		
+		Command flyCommand = null;
+		if (oi.partnerDSstick.getRawButton(5) && !lastIncFly){
+			flyCommand = new incrementFlywheelSpeed();
+		}
+		else if (oi.partnerDSstick.getRawAxis(2) >= 0.98 && !lastIncFly){
+			flyCommand = new decrementFlywheelSpeed();
+		}
+		if (flyCommand != null)
+			flyCommand.start();
+		lastIncFly = (oi.partnerDSstick.getRawButton(5) | oi.partnerDSstick.getRawAxis(2) >= 0.98);		
+				//butGateToggle.whenPressed(new pulseArms());
 	}
 
 	/**

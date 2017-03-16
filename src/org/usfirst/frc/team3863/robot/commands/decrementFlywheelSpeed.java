@@ -20,7 +20,7 @@ public class decrementFlywheelSpeed extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	ShooterMechanism.changeSetShootSpeed(-0.05);
+    	ShooterMechanism.changeSetShootSpeed(-0.025);
     	ShooterMechanism.updateSpeed();
     }
 
