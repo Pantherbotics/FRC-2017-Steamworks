@@ -14,6 +14,7 @@ public class AutoTransmission extends BaseCommand {
     // Called repeatedly when this Command is scheduled to run
     @SuppressWarnings("static-access")
 	protected void execute() {
+    	return;
     	if(oi.arcadeDSstick.getRawButton(RobotMap.drive_transToggleButton) && !oi.autoTransmissionTrigger){
     		System.out.println("AutoTrans Disabled");
     		oi.autoTransmissionEnabled = false;
@@ -56,7 +57,7 @@ public class AutoTransmission extends BaseCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return True;
     }
 
     // Called once after isFinished returns true
