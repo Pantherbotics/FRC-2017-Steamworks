@@ -171,7 +171,7 @@ public class Robot extends IterativeRobot {
 			flyCommand.start();
 		lastIncFly = (oi.partnerDSstick.getRawButton(5) | oi.partnerDSstick.getRawAxis(2) >= 0.98);		
 				//butGateToggle.whenPressed(new pulseArms());
-		if (oi.partnerDSstick.getRawButton(6)){
+		if (oi.partnerDSstick.getRawButton(4)){
 			Winch.setWinchPower(-1);
 		}else{
 			Winch.setWinchPower(0);
