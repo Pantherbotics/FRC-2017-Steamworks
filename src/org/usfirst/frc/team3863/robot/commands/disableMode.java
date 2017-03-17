@@ -21,7 +21,7 @@ public class disableMode extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean st = ShooterMechanism.getGateState();
+    	oi.lastIntakeState = 0;
     	Intake.stopIntake();
     	ShooterMechanism.disableMode();
     }

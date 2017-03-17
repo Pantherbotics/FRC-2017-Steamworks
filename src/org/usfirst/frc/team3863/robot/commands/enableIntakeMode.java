@@ -21,8 +21,8 @@ public class enableIntakeMode extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean st = ShooterMechanism.getGateState();
-    	if (!st){
+    	if (!(oi.lastIntakeState==1)){
+    		oi.lastIntakeState = 1;
     		Intake.startIntake();
     		ShooterMechanism.enableIntakeMode();
     	}

@@ -175,7 +175,7 @@ public class Robot extends IterativeRobot {
 		}else{
 			Winch.setWinchPower(0);
 		}
-		
+		ShooterMechanism.calcConstantSpeed();
 	}
 
 	/**
@@ -187,4 +187,5 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 		
 	}
+	
 }

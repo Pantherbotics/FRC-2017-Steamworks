@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterMechanism extends Subsystem {
 	boolean intakeMode = false;
-	static double setShootSpeed = 1.0;
+	static double setShootSpeed = 0.775;
 	static CANTalon flywheelATalon = new CANTalon(RobotMap.flywheelATalonID);
 	static CANTalon flywheelBTalon = new CANTalon(RobotMap.flywheelBTalonID);
 	static CANTalon flywheelBeltTalon = new CANTalon(RobotMap.flywheelBeltTalonID);
@@ -32,8 +32,8 @@ public class ShooterMechanism extends Subsystem {
         SmartDashboard.putBoolean("ShroudLimitSwitch", flywheelCoverTalon.isFwdLimitSwitchClosed());
         SmartDashboard.putNumber("actualCoverPower", flywheelCoverTalon.get());
         SmartDashboard.putNumber("setFlywheelPower", setShootSpeed);
-        SmartDashboard.putNumber("actualFlywheelSpeedA", flywheelATalon.getSpeed());
-        SmartDashboard.putNumber("actualFlywheelSpeedB", flywheelBTalon.getSpeed());
+        SmartDashboard.putNumber("actualFlywheelSpeedA", flywheelATalon.getEncVelocity());
+        SmartDashboard.putNumber("actualFlywheelSpeedB", flywheelBTalon.getEncVelocity());
     }
     
     public static void changeSetShootSpeed(double incr){
@@ -158,6 +158,13 @@ public class ShooterMechanism extends Subsystem {
         	}
     	}
     	
+    }
+    
+    public static void calcConstantSpeed(){
+    	if (flywheelATalon.get() <= 0.01){return;}
+    	double vel = (flywheelATalon.getEncVelocity()+flywheelBTalon.getEncVelocity())/2;
+    	double error = 450-vel;
+    	changeSetShootSpeed(error*0.01);
     }
 }
 

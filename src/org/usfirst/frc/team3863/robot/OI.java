@@ -65,6 +65,9 @@ public class OI {
 	public boolean autoTransmissionEnabled = false;
 	public boolean intakeWheelToggle = false;
 	public boolean intakeWheelEnabled = false;
+	public int lastIntakeState = 0; //0 - Disabled
+									//1 - Intake
+									//2 - Shoot
 	
 	public OI(){
 		//butFlywheelUp.whenPressed(new incrementFlywheelSpeed());
