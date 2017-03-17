@@ -43,16 +43,21 @@ public class ShooterMechanism extends Subsystem {
     public static void zeroShroud(){
     	boolean zeroed = false;
     	int idx = 0;
-    	while (!zeroed && idx < 500){
+    	while (!zeroed){
+    		if (idx > 500){break;}
     		zeroed = flywheelCoverTalon.isFwdLimitSwitchClosed();
     		lowerShroud(0.01);
-    		idx ++;
+    		idx += 1;
+    		System.out.println("idx: "+idx);
     	}
     	idx = 0;
-    	while (zeroed && idx < 500){
+    	while (zeroed){
+    		if (idx > 500){break;}
     		zeroed = flywheelCoverTalon.isFwdLimitSwitchClosed();
     		raiseShroud(0.01);
-    		idx ++;
+    		idx += 1;
+    		System.out.println("idx: "+idx);
+    		
     	}
     	System.out.println("Zeroed!");
     	flywheelCoverTalon.setPosition(0);
@@ -60,8 +65,12 @@ public class ShooterMechanism extends Subsystem {
     
     public static void extendShroud(){
     	boolean extend = false;
+    	int idx = 0;
     	while (!extend){
+    		if (idx > 200){break;}
     		extend = raiseShroud(0.01);
+    		idx += 1;
+    		System.out.println("idx:"+idx);
     	}
     	System.out.println("Extended");
     }

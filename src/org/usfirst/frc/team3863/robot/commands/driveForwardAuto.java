@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3863.robot.commands;
 
+import org.usfirst.frc.team3863.robot.subsystems.Winch;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,8 +24,11 @@ public class driveForwardAuto extends BaseCommand {
     protected void execute() {
     	driveTrain.setTransFast();
     	driveTrain.setPower(0.8, 0.8);
-    	Timer.delay(1);
-    	driveTrain.setPower(0, 0);
+    	Winch.setWinchPower(-1);
+    	Timer.delay(0.5);
+    	Winch.setWinchPower(0);
+    	Timer.delay(2);
+    	driveTrain.setPower(0,0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
