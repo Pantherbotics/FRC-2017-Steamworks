@@ -21,12 +21,12 @@ public class Winch extends Subsystem {
     	winchTalonB.set(power);
     }
     
-    public void enableBreak(){
+    public static void enableBreak(){
     	winchTalonA.enableBrakeMode(true);
     	winchTalonB.enableBrakeMode(true);
     }
     
-    public void disableBreak(){
+    public static void disableBreak(){
     	winchTalonA.enableBrakeMode(false);
     	winchTalonB.enableBrakeMode(false);
     }

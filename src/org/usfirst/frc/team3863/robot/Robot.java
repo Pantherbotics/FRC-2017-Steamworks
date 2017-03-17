@@ -172,10 +172,11 @@ public class Robot extends IterativeRobot {
 				//butGateToggle.whenPressed(new pulseArms());
 		if (oi.partnerDSstick.getRawButton(4)){
 			Winch.setWinchPower(-1);
+			Winch.enableBreak();
 		}else{
 			Winch.setWinchPower(0);
+			//Winch.disableBreak();
 		}
-		ShooterMechanism.calcConstantSpeed();
 	}
 
 	/**
