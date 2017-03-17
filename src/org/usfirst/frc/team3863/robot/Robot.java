@@ -44,14 +44,13 @@ public class Robot extends IterativeRobot {
 		BaseCommand.init();
 		oi = new OI();
 		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
-		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Drive Mode", chooser);
 		//autoTransCommand = new AutoTransmission();
 		
 		autonChooser.addDefault("No Autonomous", null);
 		autonChooser.addObject("Drive Forward 1s", null);
 
-		SmartDashboard.putData("Autonomous Selection:", chooser);
+		SmartDashboard.putData("Autonomous Selection", autonChooser);
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 
-		Command autonomousCommand = chooser.getSelected();
+		Command autonomousCommand = autonChooser.getSelected();
 		 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
