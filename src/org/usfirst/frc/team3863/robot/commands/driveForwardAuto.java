@@ -22,12 +22,13 @@ public class driveForwardAuto extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.print("Autonomous - Drive Forward");
     	driveTrain.setTransFast();
-    	driveTrain.setPower(0.8, 0.8);
-    	Winch.setWinchPower(-1);
+    	driveTrain.setPower(0.1, 0.1);
+    	Winch.setWinchPower(-0.5);
     	Timer.delay(0.5);
     	Winch.setWinchPower(0);
-    	Timer.delay(2);
+    	Timer.delay(2.5);
     	driveTrain.setPower(0,0);
     }
 
