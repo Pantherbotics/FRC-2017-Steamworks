@@ -1,11 +1,12 @@
 package org.usfirst.frc.team3863.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class driveForwardAuto extends Command {
+public class driveForwardAuto extends BaseCommand {
 
     public driveForwardAuto() {
         // Use requires() here to declare subsystem dependencies
@@ -18,11 +19,15 @@ public class driveForwardAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	driveTrain.setTransFast();
+    	driveTrain.setPower(0.8, 0.8);
+    	Timer.delay(1);
+    	driveTrain.setPower(0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
