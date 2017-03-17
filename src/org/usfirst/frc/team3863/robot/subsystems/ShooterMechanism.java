@@ -70,14 +70,14 @@ public class ShooterMechanism extends Subsystem {
     	if (flywheelCoverTalon.getPosition() >= 2800){
     		return true;
     	}
-    	flywheelCoverTalon.set(-0.3);
+    	flywheelCoverTalon.set(-0.5);
     	Timer.delay(RTime);
     	flywheelCoverTalon.set(0);
     	return false;
     }
     
     public static void lowerShroud(double LTime){
-    	flywheelCoverTalon.set(0.6);
+    	flywheelCoverTalon.set(0.75);
     	Timer.delay(LTime);
     	flywheelCoverTalon.set(0);
     }
