@@ -48,8 +48,9 @@ public class Robot extends IterativeRobot {
 		//autoTransCommand = new AutoTransmission();
 		
 		autonChooser.addDefault("No Autonomous", null);
-		autonChooser.addObject("Drive Forward 1s", new driveForwardAuto());
-
+		autonChooser.addObject("Compressor Only", null);
+		autonChooser.addObject("Drive Forward 3s", new driveForwardAuto());
+		
 		SmartDashboard.putData("Autonomous Selection", autonChooser);
 	}
 
