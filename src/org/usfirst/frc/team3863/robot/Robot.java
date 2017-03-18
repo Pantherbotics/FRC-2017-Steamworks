@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("Compressor Only", null);
 		autonChooser.addObject("Drive Forward 3s", new driveForwardAuto());
 		SmartDashboard.putData("auton_select", autonChooser);
+		CameraServers.initCamServers();
 	}
 
 	/**
