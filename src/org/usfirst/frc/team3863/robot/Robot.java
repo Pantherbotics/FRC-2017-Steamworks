@@ -44,14 +44,13 @@ public class Robot extends IterativeRobot {
 		BaseCommand.init();
 		oi = new OI();
 		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
-		SmartDashboard.putData("Drive Mode", chooser);
+		SmartDashboard.putData("drive_select", chooser);
 		//autoTransCommand = new AutoTransmission();
 		
 		autonChooser.addDefault("No Autonomous", null);
 		autonChooser.addObject("Compressor Only", null);
 		autonChooser.addObject("Drive Forward 3s", new driveForwardAuto());
-		
-		SmartDashboard.putData("Autonomous Selection", autonChooser);
+		SmartDashboard.putData("auton_select", autonChooser);
 	}
 
 	/**

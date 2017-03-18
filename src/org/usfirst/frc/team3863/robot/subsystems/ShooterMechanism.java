@@ -108,10 +108,10 @@ public class ShooterMechanism extends Subsystem {
     public static void enableIntakeMode(){
     	System.out.println("Intake Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Intake");
+    	extendShroud();
+    	closeGate();
     	setFlywheelSpeed(0.35);
     	setBeltSpeed(1);
-    	closeGate();
-    	extendShroud();
     }
     
     public static void disableMode(){
@@ -127,9 +127,10 @@ public class ShooterMechanism extends Subsystem {
     	System.out.println("Shoot Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Shoot");
     	setFlywheelSpeed(setShootSpeed);
+    	zeroShroud();
     	setBeltSpeed(1);
     	openGate();
-    	zeroShroud();
+    	
     }
     
     public static void openGate(){
