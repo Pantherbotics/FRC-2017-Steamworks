@@ -125,12 +125,11 @@ public class ShooterMechanism extends Subsystem {
     
     public static void enableShootMode(){
     	System.out.println("Shoot Mode Enabled");
-    	SmartDashboard.putString("Shooter Mode: ", "Shoot");
+    	SmartDashboard.putString("Shooter Mode: ", "Shoot High");
     	setFlywheelSpeed(setShootSpeed);
     	zeroShroud();
     	setBeltSpeed(1);
     	openGate();
-    	
     }
     
     public static void openGate(){
