@@ -28,6 +28,7 @@ public class RobotMap {
 	public static int flywheelBTalonID = 1;
 	public static int flywheelBeltTalonID = 7;
 	public static int flywheelCoverTalonID = 5;
+	public static int churnTalonID = 2;
 	
 	//PCM I/O pins
 	public static int solTransHigh = 0;
