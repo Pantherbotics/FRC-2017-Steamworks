@@ -104,6 +104,24 @@ public class Robot extends IterativeRobot {
 		if (autoTransCommand != null)
 			autoTransCommand.start();
 		
+		Thread driverThread = new Thread(() -> {
+			while (!Thread.interrupted()) {
+				double leftSpeed, rightSpeed;
+		    	if (!oi.arcadeDSstick.getRawButton(RobotMap.drive_tankToArcadeButton)){
+		    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+		        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
+		    	}else{
+		    		double Forward = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeForwardAxis);
+		        	double Twist = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeRotateAxis);	
+		        	leftSpeed = Forward-Twist;
+		        	rightSpeed = Forward+Twist;
+		    	}
+		    	DriveTrain.setPower(-leftSpeed, -rightSpeed);
+			}
+		});
+		driverThread.setDaemon(true);
+		driverThread.start();
+		
 		DriveTrain.enable();
 		ShooterMechanism.zeroShroud();
 		Command dis = new disableMode();
@@ -169,18 +187,6 @@ public class Robot extends IterativeRobot {
 			Winch.setWinchPower(0);
 			//Winch.disableBreak();
 		}
-		
-		double leftSpeed, rightSpeed;
-    	if (!oi.arcadeDSstick.getRawButton(RobotMap.drive_tankToArcadeButton)){
-    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
-        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
-    	}else{
-    		double Forward = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeForwardAxis);
-        	double Twist = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeRotateAxis);	
-        	leftSpeed = Forward-Twist;
-        	rightSpeed = Forward+Twist;
-    	}
-    	DriveTrain.setPower(-leftSpeed, -rightSpeed);
     	
     	SmartDashboard.putData(Scheduler.getInstance());
 		Scheduler.getInstance().run();
