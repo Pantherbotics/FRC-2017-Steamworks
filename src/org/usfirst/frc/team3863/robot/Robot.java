@@ -43,8 +43,6 @@ public class Robot extends IterativeRobot {
 		System.out.println("if you use enough angle brackets you can get anywhere"  );
 		BaseCommand.init();
 		oi = new OI();
-		chooser.addDefault("Arcade Drive - Default", new driveModeArcade());
-		SmartDashboard.putData("drive_select", chooser);
 		//autoTransCommand = new AutoTransmission();
 		
 		autonChooser.addDefault("No Autonomous", null);
@@ -100,7 +98,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		Command driveModeCommand = chooser.getSelected();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
@@ -108,8 +105,23 @@ public class Robot extends IterativeRobot {
 		if (autoTransCommand != null)
 			autoTransCommand.start();
 		
-		if (driveModeCommand != null)
-			driveModeCommand.start();
+		Thread driverThread = new Thread(() -> {
+			while (!Thread.interrupted()) {
+				double leftSpeed, rightSpeed;
+		    	if (!oi.arcadeDSstick.getRawButton(RobotMap.drive_tankToArcadeButton)){
+		    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+		        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
+		    	}else{
+		    		double Forward = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeForwardAxis);
+		        	double Twist = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeRotateAxis);	
+		        	leftSpeed = Forward-Twist;
+		        	rightSpeed = Forward+Twist;
+		    	}
+		    	DriveTrain.setPower(-leftSpeed, -rightSpeed);
+			}
+		});
+		driverThread.setDaemon(true);
+		driverThread.start();
 		
 		DriveTrain.enable();
 		ShooterMechanism.zeroShroud();
@@ -125,8 +137,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		SmartDashboard.putData(Scheduler.getInstance());
-		Scheduler.getInstance().run();
+
 		ShooterMechanism.debugShroud();
 		Command shroudCommand = null;
 		if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
@@ -177,6 +188,9 @@ public class Robot extends IterativeRobot {
 			Winch.setWinchPower(0);
 			//Winch.disableBreak();
 		}
+    	
+    	SmartDashboard.putData(Scheduler.getInstance());
+		Scheduler.getInstance().run();
 	}
 
 	/**
