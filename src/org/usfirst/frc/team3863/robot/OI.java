@@ -81,7 +81,7 @@ public class OI {
 		//butIntakeMode.whenPressed(new enableShooterMode());
 		//butShootMode.whenPressed(new enableIntakeMode());
 		
-		butGateToggle.whenPressed(new pulseArms());
+		butGateToggle.whileHeld(new churnBalls());
 		butIntakeBeltToggle.whenPressed(new toggleIntake());
 		
 		butTransSlow.whenPressed(new switchLowSpeedTransmission());
