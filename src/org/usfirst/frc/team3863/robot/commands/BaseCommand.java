@@ -18,6 +18,7 @@ public abstract class BaseCommand extends Command {
     public static ShooterMechanism shooterMechanism = new ShooterMechanism();
     public static Intake intake = new Intake();
     public static Winch winch = new Winch();
+    public static Churner churner = new Churner();
     public static CameraServers camera = new CameraServers();
     
     public static void init() {
