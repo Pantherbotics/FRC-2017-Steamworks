@@ -97,5 +97,10 @@ public class DriveTrain extends Subsystem {
     	rightTalonB.enable();
     	//setTransFast();
     }
+    
+    public static void debugSpeeds(){
+    	leftTalonA.getSpeed();
+    	rightTalonA.getSpeed();
+    }
 }
 

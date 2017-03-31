@@ -54,4 +54,7 @@ public class RobotMap {
 	public static double driveShiftLow_HighSpeed = 0.7*MAX_DRIVE_SPEED;
 	public static double driveShiftHigh_LowSpeed = 0.3*MAX_DRIVE_SPEED;
 	
+	public static double LEFT_CORRECTION = 1.00;
+	public static double RIGHT_CORRECTION = 1.00;
+	
 }
