@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		System.out.println("if you use enough angle brackets you can get anywhere"  );
+		System.out.println("if it doesnt work, just add foam!"  );
 		BaseCommand.init();
 		oi = new OI();
 		//autoTransCommand = new AutoTransmission();
@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addDefault("No Autonomous", null);
 		autonChooser.addObject("Compressor Only", null);
 		autonChooser.addObject("Drive Forward 3s", new driveForwardAuto());
+		autonChooser.addObject("Gear Auto", new gearAuto());
 		SmartDashboard.putData("auton_select", autonChooser);
 		CameraServers.initCamServers();
 	}

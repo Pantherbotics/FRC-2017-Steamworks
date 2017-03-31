@@ -26,9 +26,9 @@ public class CameraServers extends Subsystem {
     
     public static void initCamServers(){
     	CameraServer server = CameraServer.getInstance();
-    	
     	UsbCamera cam0 = server.startAutomaticCapture("cam0", "/dev/video0");
-    	cam0.setResolution(640, 480);
+    	//cam0.setFPS(20);
+    	cam0.setResolution(320, 240);
     	System.out.println("Camera Servers Init");
     }
 }

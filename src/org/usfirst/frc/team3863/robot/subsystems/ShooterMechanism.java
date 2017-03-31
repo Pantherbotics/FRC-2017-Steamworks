@@ -142,9 +142,9 @@ public class ShooterMechanism extends Subsystem {
     public static void enableLowShooterMode(){
     	System.out.println("Shoot Low Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Shoot Low");
-    	setFlywheelSpeed(setShootSpeed);
+    	setFlywheelSpeed(setShootSpeed*0.9);
     	zeroShroud();
-    	extendShroud(1900);
+    	extendShroud(2200);
     	setBeltSpeed(1);
     }
     
