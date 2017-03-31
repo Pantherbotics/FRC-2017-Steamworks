@@ -1,15 +1,15 @@
 package org.usfirst.frc.team3863.robot.commands;
 
-import org.usfirst.frc.team3863.robot.subsystems.ShooterMechanism;
+import org.usfirst.frc.team3863.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class incrementShroud extends BaseCommand {
+public class enableLowShooterMode extends BaseCommand {
 
-    public incrementShroud() {
+    public enableLowShooterMode() {
         // Use requires() here to declare subsystem dependencies
         requires(shooterMechanism);
     }
@@ -20,8 +20,11 @@ public class incrementShroud extends BaseCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("raise");
-    	ShooterMechanism.raiseShroud(0.1, 2700);
+    	if (!(oi.lastIntakeState==3)){
+    		oi.lastIntakeState = 3;
+    		Intake.startIntake();
+    		ShooterMechanism.enableLowShooterMode();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

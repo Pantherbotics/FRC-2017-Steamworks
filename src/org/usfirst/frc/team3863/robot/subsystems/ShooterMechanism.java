@@ -40,7 +40,7 @@ public class ShooterMechanism extends Subsystem {
     	setShootSpeed += incr;
     }
     
-    public static void zeroShroud(){
+    public static void hardstopShroud(){
     	boolean zeroed = false;
     	int idx = 0;
     	while (!zeroed){
@@ -50,11 +50,16 @@ public class ShooterMechanism extends Subsystem {
     		idx += 1;
     		System.out.println("idxl: "+idx);
     	}
-    	idx = 0;
+    }
+    
+    public static void zeroShroud(){
+    	hardstopShroud();
+    	int idx = 0;
+    	boolean zeroed = true;
     	while (zeroed){
-    		if (idx > 80){System.out.println("SHROUD SAFETY TRIPPED! ENCODER MAY HAVE FAILED!!!!!!!");break;}
+    		if (idx > 80){System.out.println("SHROUD SAFETY TRIPPED! LIMIT SWITCH MAY HAVE FAILED!!!!!!!");break;}
     		zeroed = flywheelCoverTalon.isFwdLimitSwitchClosed();
-    		raiseShroud(0.01);
+    		raiseShroud(0.01, 2700);
     		idx += 1;
     		System.out.println("idxr: "+idx);
     		
@@ -63,20 +68,21 @@ public class ShooterMechanism extends Subsystem {
     	flywheelCoverTalon.setPosition(0);
     }
     
-    public static void extendShroud(){
+    public static void extendShroud(double raisePos){
     	boolean extend = false;
     	int idx = 0;
     	while (!extend){
-    		if (idx > 200){break;}
-    		extend = raiseShroud(0.01);
+    		if (idx > 200){System.out.println("SHROUD SAFETY TRIPPED! ENCODER MAY HAVE FAILED!!!!!!!");break;}
+    		extend = raiseShroud(0.01, raisePos);
     		idx += 1;
     		System.out.println("idx:"+idx);
     	}
     	System.out.println("Extended");
     }
     
-    public static boolean raiseShroud(double RTime){
-    	if (flywheelCoverTalon.getPosition() >= 2800){
+    public static boolean raiseShroud(double RTime, double limitMax){
+    	if (limitMax > 2700){limitMax = 2700;}
+    	if (flywheelCoverTalon.getPosition() >= limitMax){
     		return true;
     	}
     	flywheelCoverTalon.set(-0.5);
@@ -84,6 +90,8 @@ public class ShooterMechanism extends Subsystem {
     	flywheelCoverTalon.set(0);
     	return false;
     }
+    
+    
     
     public static void lowerShroud(double LTime){
     	flywheelCoverTalon.set(0.75);
@@ -108,7 +116,7 @@ public class ShooterMechanism extends Subsystem {
     public static void enableIntakeMode(){
     	System.out.println("Intake Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Intake");
-    	extendShroud();
+    	extendShroud(2700);
     	closeGate();
     	setFlywheelSpeed(0.35);
     	setBeltSpeed(1);
@@ -124,10 +132,19 @@ public class ShooterMechanism extends Subsystem {
     }
     
     public static void enableShootMode(){
-    	System.out.println("Shoot Mode Enabled");
+    	System.out.println("Shoot High Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Shoot High");
     	setFlywheelSpeed(setShootSpeed);
+    	hardstopShroud();
+    	setBeltSpeed(1);
+    }
+    
+    public static void enableLowShooterMode(){
+    	System.out.println("Shoot Low Mode Enabled");
+    	SmartDashboard.putString("Shooter Mode: ", "Shoot Low");
+    	setFlywheelSpeed(setShootSpeed);
     	zeroShroud();
+    	extendShroud(1900);
     	setBeltSpeed(1);
     }
     

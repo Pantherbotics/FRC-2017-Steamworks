@@ -145,6 +145,9 @@ public class Robot extends IterativeRobot {
 		else if (oi.partnerDSstick.getPOV() == 270 && lastPOV == -1){
 			shroudCommand = new enableIntakeMode();
 		}
+		else if (oi.partnerDSstick.getPOV() == 90 && lastPOV == -1){
+			shroudCommand = new enableLowShooterMode();
+        }
 		else if (oi.partnerDSstick.getPOV() == 180 && lastPOV == -1){
 			shroudCommand = new disableMode();
         }
