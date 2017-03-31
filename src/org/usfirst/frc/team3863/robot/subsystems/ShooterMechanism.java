@@ -48,15 +48,15 @@ public class ShooterMechanism extends Subsystem {
     		zeroed = flywheelCoverTalon.isFwdLimitSwitchClosed();
     		lowerShroud(0.01);
     		idx += 1;
-    		System.out.println("idx: "+idx);
+    		System.out.println("idxl: "+idx);
     	}
     	idx = 0;
     	while (zeroed){
-    		if (idx > 500){break;}
+    		if (idx > 80){System.out.println("SHROUD SAFETY TRIPPED! ENCODER MAY HAVE FAILED!!!!!!!");break;}
     		zeroed = flywheelCoverTalon.isFwdLimitSwitchClosed();
     		raiseShroud(0.01);
     		idx += 1;
-    		System.out.println("idx: "+idx);
+    		System.out.println("idxr: "+idx);
     		
     	}
     	System.out.println("Zeroed!");
@@ -129,7 +129,6 @@ public class ShooterMechanism extends Subsystem {
     	setFlywheelSpeed(setShootSpeed);
     	zeroShroud();
     	setBeltSpeed(1);
-    	openGate();
     }
     
     public static void openGate(){

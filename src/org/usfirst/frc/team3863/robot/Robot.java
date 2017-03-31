@@ -124,7 +124,6 @@ public class Robot extends IterativeRobot {
 		driverThread.start();
 		
 		DriveTrain.enable();
-		ShooterMechanism.zeroShroud();
 		Command dis = new disableMode();
 		dis.start();
 		Intake.startIntake();

@@ -26,7 +26,7 @@ public class pulseArms extends BaseCommand {
     	}else{
     		ShooterMechanism.openGate();
     	}
-    	
+  
     }
 
     // Make this return true when this Command no longer needs to run execute()
