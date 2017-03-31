@@ -23,12 +23,8 @@ public class pulseArms extends BaseCommand {
     	boolean st = ShooterMechanism.getGateState();
     	if (!st){
     		ShooterMechanism.closeGate();
-    		Timer.delay(0.2);
-    		ShooterMechanism.openGate();
     	}else{
     		ShooterMechanism.openGate();
-    		Timer.delay(0.4);
-    		ShooterMechanism.closeGate();
     	}
     	
     }

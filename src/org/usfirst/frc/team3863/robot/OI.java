@@ -45,7 +45,7 @@ public class OI {
 	public Joystick partnerDSstick = new Joystick(RobotMap.partnerDSJoystick);
 	
 	Button butIntakeBeltToggle = new JoystickButton(partnerDSstick, 2);
-	Button butGateToggle = new JoystickButton(partnerDSstick, 3);
+	Button butGateToggle = new JoystickButton(partnerDSstick, 1);
 	Button butRunWinch = new JoystickButton(partnerDSstick, 4);
 	
 	Button butTransFast = new JoystickButton(leftDSstick, 1);
@@ -81,9 +81,9 @@ public class OI {
 		//butIntakeMode.whenPressed(new enableShooterMode());
 		//butShootMode.whenPressed(new enableIntakeMode());
 		
-		butGateToggle.whileHeld(new churnBalls());
+		//butGateToggle.whileHeld(new churnBalls());
 		butIntakeBeltToggle.whenPressed(new toggleIntake());
-		
+		butGateToggle.whenPressed(new pulseArms());
 		butTransSlow.whenPressed(new switchLowSpeedTransmission());
 		butTransFast.whenPressed(new switchHighSpeedTransmission());
 	}

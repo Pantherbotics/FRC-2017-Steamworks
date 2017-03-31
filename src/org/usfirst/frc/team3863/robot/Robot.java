@@ -188,6 +188,13 @@ public class Robot extends IterativeRobot {
 			Winch.setWinchPower(0);
 			//Winch.disableBreak();
 		}
+		
+		if (oi.partnerDSstick.getRawButton(3)){
+			Churner.churnForward();
+		}else{
+			Churner.setPower(0);
+			//Winch.disableBreak();
+		}
     	
     	SmartDashboard.putData(Scheduler.getInstance());
 		Scheduler.getInstance().run();
