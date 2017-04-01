@@ -83,9 +83,11 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 
 		Command autonomousCommand = autonChooser.getSelected();
+		
 		 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
+			System.out.println("Running Auton: "+autonomousCommand.getName());
 			autonomousCommand.start();
 	}
 
