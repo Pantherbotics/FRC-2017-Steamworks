@@ -81,7 +81,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		Command autonomousCommand = autonChooser.getSelected();
 		
 		 
@@ -186,7 +185,7 @@ public class Robot extends IterativeRobot {
 			flyCommand.start();
 		lastIncFly = (oi.partnerDSstick.getRawButton(5) | oi.partnerDSstick.getRawAxis(2) >= 0.98);		
 				//butGateToggle.whenPressed(new pulseArms());
-		if (oi.partnerDSstick.getRawButton(4)){
+		if (oi.partnerDSstick.getRawButton(4) | oi.arcadeDSstick.getRawButton(6)){
 			Winch.setWinchPower(-1);
 			Winch.enableBreak();
 		}else{
