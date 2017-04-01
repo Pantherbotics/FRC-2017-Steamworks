@@ -18,6 +18,10 @@ public class Intake extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public static void debug(){
+    	
+    }
+    
     public static void startIntake(){
     	intakeTalon.enable();
     	intakeTalon.set(1);
