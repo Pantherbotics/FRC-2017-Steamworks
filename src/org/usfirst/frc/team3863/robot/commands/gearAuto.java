@@ -22,12 +22,13 @@ public class gearAuto extends BaseCommand {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    //Drive to wall: 110.02 inches
     protected void execute() {
     	System.out.print("Autonomous - Gear");
     	driveTrain.setTransSlow();
-    	driveTrain.setPower(0.5*RobotMap.LEFT_CORRECTION, 0.5*RobotMap.RIGHT_CORRECTION);
+    	driveTrain.setPower(0.3*RobotMap.LEFT_CORRECTION, 0.3*RobotMap.RIGHT_CORRECTION);
     	Timer.delay(1.75);
-    	driveTrain.setPower(0.1*RobotMap.LEFT_CORRECTION, 0.1*RobotMap.RIGHT_CORRECTION);
+    	driveTrain.setPower(0.2*RobotMap.LEFT_CORRECTION, 0.2*RobotMap.RIGHT_CORRECTION);
     	Timer.delay(4);
     	driveTrain.setPower(0,0);
     	//Timer.delay(2);
