@@ -72,8 +72,6 @@ public class Robot extends IterativeRobot {
 				lastAutonSelect = autonomousCommand.getName();
 			}
 		}
-		
-		
 		Scheduler.getInstance().run();
 	}
 
@@ -135,10 +133,10 @@ public class Robot extends IterativeRobot {
 		driverThread.start();
 		
 		DriveTrain.enable();
-		/*
+		
 		Command dis = new disableMode();
 		dis.start();
-		*/
+		
 		Intake.startIntake();
 		//ShooterMechanism.extendShroud();
 		//ShooterMechanism.enableIntakeMode();
@@ -149,18 +147,19 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		/*
+		
 		ShooterMechanism.debugShroud();
 		Command shroudCommand = null;
-		if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
-			shroudCommand = new enableShooterMode();
-		}
-		else if (oi.partnerDSstick.getPOV() == 270 && lastPOV == -1){
+		//if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
+		//	shroudCommand = new enableShooterMode();
+		//}
+		//else 
+		if (oi.partnerDSstick.getPOV() == 270 && lastPOV == -1){
 			shroudCommand = new enableIntakeMode();
 		}
-		else if (oi.partnerDSstick.getPOV() == 90 && lastPOV == -1){
-			shroudCommand = new enableLowShooterMode();
-        }
+		//else if (oi.partnerDSstick.getPOV() == 90 && lastPOV == -1){
+		//	shroudCommand = new enableLowShooterMode();
+        //}
 		else if (oi.partnerDSstick.getPOV() == 180 && lastPOV == -1){
 			shroudCommand = new disableMode();
         }
@@ -169,7 +168,7 @@ public class Robot extends IterativeRobot {
 			shroudCommand.start();
 		
 		lastPOV = oi.partnerDSstick.getPOV();
-		*/
+		
 		
 		if (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8) && !lastIntakeToggle){
 			Command curCMD = new toggleShooterBelt();
