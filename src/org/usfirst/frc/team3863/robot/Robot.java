@@ -22,6 +22,7 @@ import org.usfirst.frc.team3863.robot.commands.AutoTransmission;
  */
 public class Robot extends IterativeRobot {
     int lastPOV = 0;
+    String lastAutonSelect = new String("");
     
     boolean lastIncShoot = false;
     boolean lastIncFly = false;
@@ -62,9 +63,13 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 
 	}
-
 	@Override
 	public void disabledPeriodic() {
+		if (!(autonomousCommand.getName() == lastAutonSelect)){
+			System.out.println("Selected Auton: "+autonomousCommand.getName());
+			lastAutonSelect = autonomousCommand.getName();
+		}
+		
 		Scheduler.getInstance().run();
 	}
 
