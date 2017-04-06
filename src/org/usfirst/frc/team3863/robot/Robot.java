@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("Drive Forward 3s", new driveForwardAuto());
 		autonChooser.addObject("Gear Auto", new gearAuto());
 		SmartDashboard.putData("auton_select", autonChooser);
-		//CameraServers.initCamServers();
+		CameraServers.initCamServers();
 	}
 
 	/**
