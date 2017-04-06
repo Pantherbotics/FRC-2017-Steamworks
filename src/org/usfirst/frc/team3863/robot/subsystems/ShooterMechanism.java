@@ -53,7 +53,7 @@ public class ShooterMechanism extends Subsystem {
     }
     
     public static void zeroShroud(){
-    	//hardstopShroud();
+    	hardstopShroud();
     	int idx = 0;
     	boolean zeroed = true;
     	while (zeroed){
@@ -115,9 +115,9 @@ public class ShooterMechanism extends Subsystem {
     public static void enableIntakeMode(){
     	System.out.println("Intake Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Intake");
-    	//extendShroud(2700);
+    	extendShroud(2700);
     	closeGate();
-    	setFlywheelSpeed(0.25);
+    	setFlywheelSpeed(0.35);
     	setBeltSpeed(1);
     }
     
@@ -127,7 +127,7 @@ public class ShooterMechanism extends Subsystem {
     	setFlywheelSpeed(0);
     	setBeltSpeed(0);
     	closeGate();
-    	//zeroShroud();
+    	zeroShroud();
     }
     
     public static void enableShootMode(){
@@ -139,7 +139,7 @@ public class ShooterMechanism extends Subsystem {
 		flywheelBTalon.set(RobotMap.flywheelATalonID);
 		flywheelATalon.setPID(RobotMap.flywheelKp,RobotMap.flywheelKi,RobotMap.flywheelKd);
     	setFlywheelSpeed(setShootSpeed);
-    	//hardstopShroud();
+    	hardstopShroud();
     	setBeltSpeed(1);
     }
     
@@ -147,8 +147,8 @@ public class ShooterMechanism extends Subsystem {
     	System.out.println("Shoot Low Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Shoot Low");
     	setFlywheelSpeed(setShootSpeed*0.9);
-    	//zeroShroud();
-    	//extendShroud(2200);
+    	zeroShroud();
+    	extendShroud(2200);
     	setBeltSpeed(1);
     }
     
