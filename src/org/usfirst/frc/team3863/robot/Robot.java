@@ -147,7 +147,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		/*
+
 		ShooterMechanism.debugShroud();
 		Command shroudCommand = null;
 		if (oi.partnerDSstick.getPOV() == 0 && lastPOV == -1){
@@ -162,12 +162,9 @@ public class Robot extends IterativeRobot {
 		else if (oi.partnerDSstick.getPOV() == 180 && lastPOV == -1){
 			shroudCommand = new disableMode();
         }
-		
 		if (shroudCommand != null)
 			shroudCommand.start();
-		
 		lastPOV = oi.partnerDSstick.getPOV();
-		*/
 		
 		if (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8) && !lastIntakeToggle){
 			Command curCMD = new toggleShooterBelt();
@@ -175,7 +172,6 @@ public class Robot extends IterativeRobot {
 		}
 		lastIntakeToggle = (oi.partnerDSstick.getRawButton(7) && oi.partnerDSstick.getRawButton(8));
 		
-		/*
 		Command posCommand = null;
 		if (oi.partnerDSstick.getRawButton(6) && !lastIncShoot){
 			posCommand = new incrementShroud();
@@ -185,7 +181,6 @@ public class Robot extends IterativeRobot {
 		}
 		if (posCommand != null)
 			posCommand.start();
-		
 		lastIncShoot = (oi.partnerDSstick.getRawButton(6) | oi.partnerDSstick.getRawAxis(3) >= 0.98);
 		
 		Command flyCommand = null;
@@ -199,7 +194,6 @@ public class Robot extends IterativeRobot {
 			flyCommand.start();
 		lastIncFly = (oi.partnerDSstick.getRawButton(5) | oi.partnerDSstick.getRawAxis(2) >= 0.98);		
 				//butGateToggle.whenPressed(new pulseArms());
-		*/
 		if (oi.partnerDSstick.getRawButton(4) | oi.arcadeDSstick.getRawButton(6)){
 			Winch.setWinchPower(-1);
 			Winch.enableBreak();
