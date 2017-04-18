@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterMechanism extends Subsystem {
 	boolean intakeMode = false;
-	static double setShootSpeed = 0.775;
+	static double setShootSpeed = 10;	//need to tweak values
 	static CANTalon flywheelATalon = new CANTalon(RobotMap.flywheelATalonID);
 	static CANTalon flywheelBTalon = new CANTalon(RobotMap.flywheelBTalonID);
 	static CANTalon flywheelBeltTalon = new CANTalon(RobotMap.flywheelBeltTalonID);
@@ -98,11 +98,10 @@ public class ShooterMechanism extends Subsystem {
     	Timer.delay(LTime);
     	flywheelCoverTalon.set(0);
     }
-    
-    public static void setFlywheelSpeed(double speed){
-    	flywheelATalon.set(-speed);
-    	flywheelBTalon.set(speed);
-    }
+
+	public static void setFlywheelSpeed(double speed){
+		flywheelATalon.set(speed);	//swap anderson connector
+	}
     
     public static void setBeltSpeed(double speed){
     	flywheelBeltTalon.set(-speed);
@@ -134,6 +133,11 @@ public class ShooterMechanism extends Subsystem {
     public static void enableShootMode(){
     	System.out.println("Shoot High Mode Enabled");
     	SmartDashboard.putString("Shooter Mode: ", "Shoot High");
+		flywheelATalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		flywheelATalon.changeControlMode(CANTalon.TalonControlMode.Speed);
+		flywheelBTalon.changeControlMode(CANTalon.TalonControlMode.Follower);
+		flywheelBTalon.set(RobotMap.flywheelATalonID);
+		flywheelATalon.setPID(RobotMap.flywheelKp,RobotMap.flywheelKi,RobotMap.flywheelKd);
     	setFlywheelSpeed(setShootSpeed);
     	//hardstopShroud();
     	setBeltSpeed(1);
