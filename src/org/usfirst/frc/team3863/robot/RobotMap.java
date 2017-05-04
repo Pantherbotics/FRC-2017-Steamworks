@@ -37,13 +37,13 @@ public class RobotMap {
 	public static int solGateClose = 3;
 
 	//FLYWHEEL PID
-	public static double flywheelKp = 0.12;
-	public static double flywheelKi = 0;
-	public static double flywheelKd = 0.5;
+	public static double flywheelKp = 1;
+	public static double flywheelKi = 1;
+	public static double flywheelKd = 0;
 	
 	//==============CALIBRATION CONSTANTS==============//
 	//Drive code calibration constants (DO NOT CHANGE UNLESS YOU KNOW WHAT YOU ARE DOING!)
-	public static double MAX_DRIVE_SPEED = 4000;
+	public static double MAX_DRIVE_SPEED = 600;
 	
 	//=====================SETTINGS====================//
 	//Joystick Button Mappings

@@ -22,8 +22,8 @@ public class enableShooterMode extends BaseCommand {
     protected void execute() {
     	if (!(oi.lastIntakeState==2)){
     		oi.lastIntakeState = 2;
-    		Intake.startIntake();
     		ShooterMechanism.enableShootMode();
+    		Intake.startIntake();
     	}
     }
 

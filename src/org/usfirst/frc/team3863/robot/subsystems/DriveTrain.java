@@ -3,6 +3,8 @@ package org.usfirst.frc.team3863.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import java.lang.Math;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+
 import org.usfirst.frc.team3863.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -30,6 +32,10 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public static void turn(int degrees){
+    	
     }
     
     public static double getVelocityAvg(){
@@ -76,10 +82,9 @@ public class DriveTrain extends Subsystem {
     }
     
     public static void setPower(double left, double right){
-    	leftTalonA.set(-left);
-    	leftTalonB.set(-left);
+    	leftTalonA.set(left);
+    	rightTalonA.reverseOutput(true);
     	rightTalonA.set(right);
-    	rightTalonB.set(right);
     }
     
     public void disable(){
@@ -91,6 +96,26 @@ public class DriveTrain extends Subsystem {
     }
     
     public static void enable(){
+
+    	/*leftTalonA.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	rightTalonA.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	leftTalonB.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	rightTalonB.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	
+    	rightTalonA.setProfile(0);
+    	leftTalonA.setProfile(0);
+    	rightTalonA.reverseOutput(true);
+    	leftTalonA.reverseOutput(true);
+    	rightTalonA.reverseSensor(true);
+    	leftTalonA.reverseSensor(false);
+    	rightTalonA.configEncoderCodesPerRev(20);
+    	leftTalonA.configEncoderCodesPerRev(20);*/
+
+    	
+    	rightTalonB.changeControlMode(TalonControlMode.Follower);
+    	rightTalonB.set(RobotMap.rightADriveTalonID);
+    	leftTalonB.changeControlMode(TalonControlMode.Follower);
+    	leftTalonB.set(RobotMap.leftADriveTalonID);
     	leftTalonA.enable();
     	leftTalonB.enable();
     	rightTalonA.enable();

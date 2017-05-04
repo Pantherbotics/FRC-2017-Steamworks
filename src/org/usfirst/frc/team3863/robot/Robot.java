@@ -117,18 +117,26 @@ public class Robot extends IterativeRobot {
 			autoTransCommand.start();
 		
 		Thread driverThread = new Thread(() -> {
+			boolean inLow = false;
+			Command transSwitch;
 			while (!Thread.interrupted()) {
-				double leftSpeed, rightSpeed;
-		    	if (!oi.arcadeDSstick.getRawButton(RobotMap.drive_tankToArcadeButton)){
-		    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
-		        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
-		    	}else{
-		    		double Forward = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeForwardAxis);
-		        	double Twist = oi.arcadeDSstick.getRawAxis(RobotMap.drive_arcadeRotateAxis);	
-		        	leftSpeed = Forward-Twist;
-		        	rightSpeed = Forward+Twist;
-		    	}
-		    	DriveTrain.setPower(-leftSpeed, -rightSpeed);
+				double leftSpeed,rightSpeed;
+		    		leftSpeed = /*RobotMap.MAX_DRIVE_SPEED**/oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+		        	rightSpeed = /*RobotMap.MAX_DRIVE_SPEED**/oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
+		        	if(!inLow && leftSpeed < RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed < RobotMap.MAX_DRIVE_SPEED/2){
+		        		inLow = true;
+		        		transSwitch = new switchLowSpeedTransmission();
+		        		transSwitch.start();
+				    	DriveTrain.setPower(leftSpeed, rightSpeed);
+		        	}
+		        	if(inLow && leftSpeed > RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed > RobotMap.MAX_DRIVE_SPEED/2){
+		        		inLow = false;
+		        		transSwitch = new switchHighSpeedTransmission();
+		        		transSwitch.start();
+		        		DriveTrain.setPower(leftSpeed, rightSpeed);
+		        	}
+		        	else
+		        		DriveTrain.setPower(leftSpeed, rightSpeed);
 			}
 		});
 		driverThread.setDaemon(true);
