@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3863.robot.commands;
 
 import org.usfirst.frc.team3863.robot.subsystems.*;
+import org.usfirst.frc.team3863.robot.vision.*;
+import edu.wpi.first.wpilibj.vision.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 

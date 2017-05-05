@@ -118,21 +118,18 @@ public class Robot extends IterativeRobot {
 		
 		Thread driverThread = new Thread(() -> {
 			boolean inLow = false;
-			Command transSwitch;
 			while (!Thread.interrupted()) {
 				double leftSpeed,rightSpeed;
-		    		leftSpeed = /*RobotMap.MAX_DRIVE_SPEED**/oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
-		        	rightSpeed = /*RobotMap.MAX_DRIVE_SPEED**/oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
+		    		leftSpeed = RobotMap.MAX_DRIVE_SPEED*oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+		        	rightSpeed = RobotMap.MAX_DRIVE_SPEED*oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
 		        	if(!inLow && leftSpeed < RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed < RobotMap.MAX_DRIVE_SPEED/2){
+		        		DriveTrain.setTransSlow();
 		        		inLow = true;
-		        		transSwitch = new switchLowSpeedTransmission();
-		        		transSwitch.start();
 				    	DriveTrain.setPower(leftSpeed, rightSpeed);
 		        	}
 		        	if(inLow && leftSpeed > RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed > RobotMap.MAX_DRIVE_SPEED/2){
 		        		inLow = false;
-		        		transSwitch = new switchHighSpeedTransmission();
-		        		transSwitch.start();
+		        		DriveTrain.setTransFast();;
 		        		DriveTrain.setPower(leftSpeed, rightSpeed);
 		        	}
 		        	else

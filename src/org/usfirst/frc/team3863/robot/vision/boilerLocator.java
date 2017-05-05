@@ -1,4 +1,4 @@
-package vision;
+package org.usfirst.frc.team3863.robot.vision;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.opencv.features2d.FeatureDetector;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.*;
 import org.opencv.objdetect.*;
-public class locateBoiler {
+public class boilerLocator {
 
 
 	/**

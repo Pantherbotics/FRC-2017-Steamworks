@@ -17,11 +17,11 @@ public class DriveTrain extends Subsystem {
 	static CANTalon leftTalonB = new CANTalon(RobotMap.leftBDriveTalonID);
 	static CANTalon rightTalonA = new CANTalon(RobotMap.rightADriveTalonID);
 	static CANTalon rightTalonB = new CANTalon(RobotMap.rightBDriveTalonID);
-    DoubleSolenoid transSolenoid = new DoubleSolenoid(RobotMap.solTransHigh, 
+    static DoubleSolenoid transSolenoid = new DoubleSolenoid(RobotMap.solTransHigh, 
 			                                          RobotMap.solTransLow);
-	Value transRest = DoubleSolenoid.Value.kOff;
-	Value transFast = DoubleSolenoid.Value.kForward;
-	Value transSlow = DoubleSolenoid.Value.kReverse;
+	static Value transRest = DoubleSolenoid.Value.kOff;
+	static Value transFast = DoubleSolenoid.Value.kForward;
+	static Value transSlow = DoubleSolenoid.Value.kReverse;
 	
 	public static boolean transState = false;
 	
@@ -69,13 +69,13 @@ public class DriveTrain extends Subsystem {
     	System.out.println("cAvg: "+aC+" vAvg: "+aV+" dL: "+dir[0]+" dR: "+dir[1]);
     }
     
-    public void setTransFast(){
+    public static void setTransFast(){
     	transSolenoid.set(DoubleSolenoid.Value.kForward);
     	//transSolenoid.set(transFast);
     	transState = true;
     }
     
-    public  void setTransSlow(){
+    public static void setTransSlow(){
     	transSolenoid.set(DoubleSolenoid.Value.kReverse);
     	//transSolenoid.set(transSlow);
     	transState = false;
@@ -83,11 +83,10 @@ public class DriveTrain extends Subsystem {
     
     public static void setPower(double left, double right){
     	leftTalonA.set(left);
-    	rightTalonA.reverseOutput(true);
-    	rightTalonA.set(right);
+    	rightTalonA.set(-right);
     }
     
-    public void disable(){
+    public static void disable(){
     	leftTalonA.disable();
     	leftTalonB.disable();
     	rightTalonA.disable();
@@ -97,30 +96,26 @@ public class DriveTrain extends Subsystem {
     
     public static void enable(){
 
-    	/*leftTalonA.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	rightTalonA.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	leftTalonB.changeControlMode(CANTalon.TalonControlMode.Follower);
-    	rightTalonB.changeControlMode(CANTalon.TalonControlMode.Follower);
-    	
-    	rightTalonA.setProfile(0);
-    	leftTalonA.setProfile(0);
-    	rightTalonA.reverseOutput(true);
-    	leftTalonA.reverseOutput(true);
-    	rightTalonA.reverseSensor(true);
-    	leftTalonA.reverseSensor(false);
-    	rightTalonA.configEncoderCodesPerRev(20);
-    	leftTalonA.configEncoderCodesPerRev(20);*/
-
-    	
-    	rightTalonB.changeControlMode(TalonControlMode.Follower);
-    	rightTalonB.set(RobotMap.rightADriveTalonID);
-    	leftTalonB.changeControlMode(TalonControlMode.Follower);
-    	leftTalonB.set(RobotMap.leftADriveTalonID);
+    	configureTalons();
     	leftTalonA.enable();
     	leftTalonB.enable();
     	rightTalonA.enable();
     	rightTalonB.enable();
     	//setTransFast();
+    }
+    
+    public static void configureTalons(){
+    	rightTalonA.changeControlMode(TalonControlMode.Speed);
+    	rightTalonB.changeControlMode(TalonControlMode.Follower);
+    	rightTalonB.set(RobotMap.rightADriveTalonID);
+    	
+    	leftTalonA.changeControlMode(TalonControlMode.Speed);
+    	leftTalonB.changeControlMode(TalonControlMode.Follower);
+    	leftTalonB.set(RobotMap.leftADriveTalonID);
+    	
+    	rightTalonA.configEncoderCodesPerRev(20);
+    	leftTalonA.configEncoderCodesPerRev(20);
+    	
     }
     
     public static void debugSpeeds(){

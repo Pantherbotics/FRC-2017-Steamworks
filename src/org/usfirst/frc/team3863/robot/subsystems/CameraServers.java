@@ -31,5 +31,9 @@ public class CameraServers extends Subsystem {
     	cam0.setResolution(320, 240);
     	System.out.println("Camera Servers Init");
     }
+    
+    public UsbCamera getCam(){
+    	return cam0;
+    }
 }
 
