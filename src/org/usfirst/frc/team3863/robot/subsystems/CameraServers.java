@@ -14,8 +14,10 @@ import org.opencv.imgproc.Imgproc;
  *
  */
 public class CameraServers extends Subsystem {
-	UsbCamera cam0, cam1;
-
+	static UsbCamera cam0, cam1;
+	static CameraServer server;
+	static final int WIDTH = 320;
+	static final int HEIGHT = 240;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -25,15 +27,24 @@ public class CameraServers extends Subsystem {
     }
     
     public static void initCamServers(){
-    	CameraServer server = CameraServer.getInstance();
-    	UsbCamera cam0 = server.startAutomaticCapture("cam0", "/dev/video0");
+    	server = CameraServer.getInstance();
+    	cam0 = server.startAutomaticCapture("cam0", "/dev/video0");
     	//cam0.setFPS(20);
     	cam0.setResolution(320, 240);
     	System.out.println("Camera Servers Init");
     }
     
-    public UsbCamera getCam(){
+    public static UsbCamera getCam(){
     	return cam0;
     }
+    
+    public static CameraServer getServer(){
+    	return server;
+    }
+    
+    public static int getWidth() { return WIDTH;}
+    
+    public static int getHeight() {return HEIGHT;}
+
 }
 

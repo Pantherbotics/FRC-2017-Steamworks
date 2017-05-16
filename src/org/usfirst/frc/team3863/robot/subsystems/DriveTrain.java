@@ -96,11 +96,12 @@ public class DriveTrain extends Subsystem {
     
     public static void enable(){
 
-    	configureTalons();
+    	//configureTalons();
     	leftTalonA.enable();
     	leftTalonB.enable();
     	rightTalonA.enable();
     	rightTalonB.enable();
+    	//configureTalons();
     	//setTransFast();
     }
     

@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterMechanism extends Subsystem {
     boolean intakeMode = false;
-    static double setShootSpeed = 1;    //need to tweak values
+    static double setShootSpeed = 50;    //need to tweak values
     static CANTalon flywheelATalon = new CANTalon(RobotMap.flywheelATalonID);
     static CANTalon flywheelBTalon = new CANTalon(RobotMap.flywheelBTalonID);
     static CANTalon flywheelBeltTalon = new CANTalon(RobotMap.flywheelBeltTalonID);
@@ -131,6 +131,8 @@ public class ShooterMechanism extends Subsystem {
         closeGate();
         setFlywheelSpeed(0.35);
         setBeltSpeed(1);
+        System.out.println(flywheelATalon.getSpeed());
+        System.out.println(flywheelBTalon.getSpeed());
     }
 
     public static void disableMode() {
@@ -148,19 +150,23 @@ public class ShooterMechanism extends Subsystem {
     public static void enableShootMode() {
         System.out.println("Shoot High Mode Enabled");
         SmartDashboard.putString("Shooter Mode: ", "Shoot High");
+        flywheelATalon.enable();
+        flywheelBTalon.enable();
         flywheelATalon.setProfile(0);
         flywheelATalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         flywheelATalon.changeControlMode(CANTalon.TalonControlMode.Speed);
         flywheelBTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
-        flywheelATalon.setPID(RobotMap.flywheelKp, RobotMap.flywheelKi, RobotMap.flywheelKd);
-        flywheelBTalon.setPID(RobotMap.flywheelKp, RobotMap.flywheelKi, RobotMap.flywheelKd);
+        //flywheelATalon.setPID(RobotMap.flywheelKp, RobotMap.flywheelKi, RobotMap.flywheelKd);
+        // flywheelBTalon.setPID(RobotMap.flywheelKp, RobotMap.flywheelKi, RobotMap.flywheelKd);
         flywheelATalon.reverseSensor(true);
         flywheelATalon.reverseOutput(true);
         flywheelBTalon.reverseSensor(true);
         flywheelBTalon.reverseOutput(false);
-        flywheelATalon.enable();
-        flywheelBTalon.enable();
-        setFlywheelSpeed(30);
+        flywheelATalon.configEncoderCodesPerRev(20);
+        flywheelBTalon.configEncoderCodesPerRev(20);
+        flywheelATalon.setCloseLoopRampRate(5);
+        flywheelBTalon.setCloseLoopRampRate(5);
+        setFlywheelSpeed(50);
         //hardstopShroud();
         setBeltSpeed(1);
     }

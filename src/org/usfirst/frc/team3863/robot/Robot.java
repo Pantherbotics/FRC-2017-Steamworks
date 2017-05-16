@@ -120,19 +120,8 @@ public class Robot extends IterativeRobot {
 			boolean inLow = false;
 			while (!Thread.interrupted()) {
 				double leftSpeed,rightSpeed;
-		    		leftSpeed = RobotMap.MAX_DRIVE_SPEED*oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
-		        	rightSpeed = RobotMap.MAX_DRIVE_SPEED*oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
-		        	if(!inLow && leftSpeed < RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed < RobotMap.MAX_DRIVE_SPEED/2){
-		        		DriveTrain.setTransSlow();
-		        		inLow = true;
-				    	DriveTrain.setPower(leftSpeed, rightSpeed);
-		        	}
-		        	if(inLow && leftSpeed > RobotMap.MAX_DRIVE_SPEED/2 && rightSpeed > RobotMap.MAX_DRIVE_SPEED/2){
-		        		inLow = false;
-		        		DriveTrain.setTransFast();;
-		        		DriveTrain.setPower(leftSpeed, rightSpeed);
-		        	}
-		        	else
+		    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
+		        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
 		        		DriveTrain.setPower(leftSpeed, rightSpeed);
 			}
 		});
@@ -162,7 +151,7 @@ public class Robot extends IterativeRobot {
 			shroudCommand = new enableIntakeMode();
 		}
 		else if (oi.partnerDSstick.getPOV() == 90 && lastPOV == -1){
-			shroudCommand = new enableLowShooterMode();
+			shroudCommand = new positionShooter();
         }
 		else if (oi.partnerDSstick.getPOV() == 180 && lastPOV == -1){
 			shroudCommand = new disableMode();
