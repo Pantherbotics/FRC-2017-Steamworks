@@ -44,6 +44,8 @@ public class RobotMap {
 	//==============CALIBRATION CONSTANTS==============//
 	//Drive code calibration constants (DO NOT CHANGE UNLESS YOU KNOW WHAT YOU ARE DOING!)
 	public static double MAX_DRIVE_SPEED = 600;
+	public static double WHEEL_DIAMETER = 6;
+	public static double WHEEL_CIRCUM = WHEEL_DIAMETER*3.14;
 	
 	//=====================SETTINGS====================//
 	//Joystick Button Mappings
@@ -59,7 +61,6 @@ public class RobotMap {
 	public static double driveShiftLow_HighSpeed = 0.7*MAX_DRIVE_SPEED;
 	public static double driveShiftHigh_LowSpeed = 0.3*MAX_DRIVE_SPEED;
 	
-	public static double LEFT_CORRECTION = 1.00;
-	public static double RIGHT_CORRECTION = 1.00;
+	public static int driveTrainEncoderTicks = 20;
 	
 }

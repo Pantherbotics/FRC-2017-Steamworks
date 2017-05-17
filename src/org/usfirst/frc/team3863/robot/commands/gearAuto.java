@@ -26,9 +26,9 @@ public class gearAuto extends BaseCommand {
     protected void execute() {
     	System.out.print("Autonomous - Gear");
     	driveTrain.setTransSlow();
-    	driveTrain.setPower(0.3*RobotMap.LEFT_CORRECTION, 0.3*RobotMap.RIGHT_CORRECTION);
+    	driveTrain.setPower(0.3, 0.3);
     	Timer.delay(1.75);
-    	driveTrain.setPower(0.2*RobotMap.LEFT_CORRECTION, 0.2*RobotMap.RIGHT_CORRECTION);
+    	driveTrain.setPower(0.2, 0.2);
     	Timer.delay(4);
     	driveTrain.setPower(0,0);
     	//Timer.delay(2);

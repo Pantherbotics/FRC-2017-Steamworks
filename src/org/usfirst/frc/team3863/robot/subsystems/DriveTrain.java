@@ -86,6 +86,15 @@ public class DriveTrain extends Subsystem {
     	rightTalonA.set(-right);
     }
     
+    public static void driveFeet(double feet){
+    	double revs = feet/(RobotMap.WHEEL_CIRCUM/12);
+    	int ticks = (int) revs*RobotMap.driveTrainEncoderTicks;
+    	leftTalonA.changeControlMode(TalonControlMode.Position);
+    	rightTalonA.changeControlMode(TalonControlMode.Position);
+    	leftTalonA.set(leftTalonA.getEncPosition()+ticks);
+    	rightTalonA.set(rightTalonA.getEncPosition()+ticks);
+    }
+    
     public static void disable(){
     	leftTalonA.disable();
     	leftTalonB.disable();
@@ -96,26 +105,26 @@ public class DriveTrain extends Subsystem {
     
     public static void enable(){
 
-    	//configureTalons();
+    	configureTalons();
     	leftTalonA.enable();
     	leftTalonB.enable();
     	rightTalonA.enable();
     	rightTalonB.enable();
-    	//configureTalons();
+    	configureTalons();
     	//setTransFast();
     }
     
     public static void configureTalons(){
-    	rightTalonA.changeControlMode(TalonControlMode.Speed);
+    	//rightTalonA.changeControlMode(TalonControlMode.Speed);
     	rightTalonB.changeControlMode(TalonControlMode.Follower);
     	rightTalonB.set(RobotMap.rightADriveTalonID);
     	
-    	leftTalonA.changeControlMode(TalonControlMode.Speed);
+    	//leftTalonA.changeControlMode(TalonControlMode.Speed);
     	leftTalonB.changeControlMode(TalonControlMode.Follower);
     	leftTalonB.set(RobotMap.leftADriveTalonID);
     	
-    	rightTalonA.configEncoderCodesPerRev(20);
-    	leftTalonA.configEncoderCodesPerRev(20);
+    	rightTalonA.configEncoderCodesPerRev(RobotMap.driveTrainEncoderTicks);
+    	leftTalonA.configEncoderCodesPerRev(RobotMap.driveTrainEncoderTicks);
     	
     }
     

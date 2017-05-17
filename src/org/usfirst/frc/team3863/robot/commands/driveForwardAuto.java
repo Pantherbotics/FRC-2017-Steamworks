@@ -26,7 +26,7 @@ public class driveForwardAuto extends BaseCommand {
 
     	System.out.print("Autonomous - Drive Forward");
     	driveTrain.setTransFast();
-    	driveTrain.setPower(1*RobotMap.LEFT_CORRECTION, 1*RobotMap.RIGHT_CORRECTION);
+    	driveTrain.setPower(1, 1);
     	Winch.setWinchPower(-0.5);
     	Timer.delay(0.5);
     	Winch.setWinchPower(0);
