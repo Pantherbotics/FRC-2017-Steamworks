@@ -1,27 +1,21 @@
 package org.usfirst.frc.team3863.robot.commands;
 
-import org.usfirst.frc.team3863.robot.RobotMap;
-import org.usfirst.frc.team3863.robot.vision.*;
-
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.vision.VisionThread;
-import edu.wpi.first.wpilibj.vision.VisionPipeline;
-import edu.wpi.first.wpilibj.vision.VisionRunner;
-import org.usfirst.frc.team3863.robot.subsystems.*;
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team3863.robot.subsystems.CameraServers;
+import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3863.robot.vision.GripPipeline;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class positionShooter extends BaseCommand{
 	
 	private Thread visionThread;
 	private GripPipeline pipeline;
 	public positionShooter() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -52,18 +46,16 @@ public class positionShooter extends BaseCommand{
     	            	Timer.delay(0.5);
     	            }
     			}
-    			
-    			
+    			SmartDashboard.putNumber("Boiler Location", centerX);
     		}
     		
     	});
+    	visionThread.start();
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	visionThread.start();
-
     }
 
     // Make this return true when this Command no longer needs to run execute()
