@@ -1,54 +1,56 @@
 package org.usfirst.frc.team3863.robot.commands;
 
-import org.opencv.core.Mat;
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team3863.robot.subsystems.CameraServers;
-import org.usfirst.frc.team3863.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team3863.robot.vision.GripPipeline;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class positionShooter extends BaseCommand{
 	
 	NetworkTable table;
+	double error = 0;
+	int centX;
+	double speed;
+	double[] defaultVal;
 	public positionShooter() {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+	protected void initialize() {
+    	defaultVal[0] = -1;
     	table = NetworkTable.getTable("GRIP/boilerContours");
-    	int centX = (int)table.getNumberArray("centerX")[0];
-    	while(Math.abs(160-centX) > 5 && centX!=0){
-    	if(centX < 160){
-    		driveTrain.setPower(0.35, -0.35);
- 	}
-    	if(centX > 160){
-    		driveTrain.setPower(-0.35, 0.35);
-    	}
-		centX = (int)table.getNumberArray("centerX")[0];
-    	SmartDashboard.putNumber("boiler loc", centX);
-    	}
-
-
+    	centX = (int)table.getNumberArray("centerX", defaultVal)[0];
+    	error = Math.abs(160-centX);
+    	speed = 0.3;
     }
 
+    private double calcSpeed(){
+    	double speed = error/160.0;
+    	if(speed < .01)
+    		speed = .1;
+    	return speed;
+    }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+    	speed = calcSpeed();
+    	if(centX < 160){
+    		driveTrain.setPower(speed, -speed);
+ 	}
+    	if(centX > 160){
+    		driveTrain.setPower(-speed, speed);
+    	}
+		centX = (int)table.getNumberArray("centerX", defaultVal)[0];
+    	error = Math.abs(160-centX);
+    	SmartDashboard.putNumber("boiler loc", centX);
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+    	return error < 5 || centX == -1;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("CENTERED!");
     }
 
     // Called when another command which requires one or more of the same
