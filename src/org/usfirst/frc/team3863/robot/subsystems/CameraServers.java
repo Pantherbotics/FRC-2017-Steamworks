@@ -24,6 +24,7 @@ public class CameraServers extends Subsystem {
     	cam0 = server.startAutomaticCapture("cam0", "/dev/video0");
     	//cam0.setFPS(20);
     	cam0.setResolution(320, 240);
+    	cam0.setExposureManual(1);
     	System.out.println("Camera Servers Init");
     }
     

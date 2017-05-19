@@ -9,63 +9,46 @@ import org.usfirst.frc.team3863.robot.vision.GripPipeline;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class positionShooter extends BaseCommand{
 	
-	private Thread visionThread;
-	private GripPipeline pipeline;
+	NetworkTable table;
 	public positionShooter() {
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	visionThread = new Thread(() -> {
-    		pipeline = new GripPipeline();
-    		CvSink cvSink = CameraServers.getServer().getVideo();
-    		Mat source = new Mat();
-    		double centerX = 0.0;
-    		double error = 0.0;
-    		cvSink.grabFrame(source);
-    		while(!Thread.interrupted() || centerX < error){
-    			pipeline.process(source);
-    			if (!pipeline.filterContoursOutput().isEmpty()) {
-    	            Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-    	            centerX = r.x;
-    	            
-    	            if(centerX > CameraServers.getWidth()/2){
-    	            	error = CameraServers.getWidth()/2-centerX;
-    	            	DriveTrain.setPower(1, -1);
-    	            	Timer.delay(0.5);
-    	       
-    	            }
-    	            
-    	            if(centerX < CameraServers.getWidth()/2){
-    	            	error = CameraServers.getWidth()/2-centerX;
-    	            	DriveTrain.setPower(-1, 1);
-    	            	Timer.delay(0.5);
-    	            }
-    			}
-    			SmartDashboard.putNumber("Boiler Location", centerX);
-    		}
-    		
-    	});
-    	visionThread.start();
+    	table = NetworkTable.getTable("GRIP/boilerContours");
+    	int centX = (int)table.getNumberArray("centerX")[0];
+    	while(Math.abs(160-centX) > 5 && centX!=0){
+    	if(centX < 160){
+    		driveTrain.setPower(0.35, -0.35);
+ 	}
+    	if(centX > 160){
+    		driveTrain.setPower(-0.35, 0.35);
+    	}
+		centX = (int)table.getNumberArray("centerX")[0];
+    	SmartDashboard.putNumber("boiler loc", centX);
+    	}
+
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	visionThread.interrupt();
     }
 
     // Called when another command which requires one or more of the same
