@@ -22,6 +22,8 @@ public class DriveTrain extends Subsystem {
 	static Value transRest = DoubleSolenoid.Value.kOff;
 	static Value transFast = DoubleSolenoid.Value.kForward;
 	static Value transSlow = DoubleSolenoid.Value.kReverse;
+
+	static boolean commandRunning = false;
 	
 	public static boolean transState = false;
 	
@@ -33,7 +35,15 @@ public class DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
+
+
+    public static boolean isCommandRunning(){
+    	return commandRunning;
+	}
+
+	public static void isCommandRunning(boolean status){
+    	commandRunning = status;
+	}
     public static void turn(int degrees){
     	
     }

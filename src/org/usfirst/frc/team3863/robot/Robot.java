@@ -118,15 +118,15 @@ public class Robot extends IterativeRobot {
 		
 		Thread driverThread = new Thread(() -> {
 			boolean inLow = false;
-			while (!Thread.interrupted()) {
+			while (!Thread.interrupted() && !DriveTrain.isCommandRunning()) {
 				double leftSpeed,rightSpeed;
 		    		leftSpeed = oi.leftDSstick.getRawAxis(RobotMap.drive_tankLeftForwardAxis);
 		        	rightSpeed = oi.rightDSstick.getRawAxis(RobotMap.drive_tankRightForwardAxis);
-		        		DriveTrain.setPower(leftSpeed, rightSpeed);
+		        	DriveTrain.setPower(leftSpeed, rightSpeed);
 			}
 		});
 		driverThread.setDaemon(true);
-		driverThread.start();
+		//driverThread.start();
 		
 		DriveTrain.enable();
 		Command dis = new disableMode();
