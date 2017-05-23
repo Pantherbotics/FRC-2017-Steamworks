@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 			}
 		});
 		driverThread.setDaemon(true);
-		//driverThread.start();
+		driverThread.start();
 		
 		DriveTrain.enable();
 		Command dis = new disableMode();
